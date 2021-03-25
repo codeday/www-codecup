@@ -120,7 +120,45 @@ class App extends Component
           <p>A project of <a href="https://codeday.org">CodeDay</a>. Licensed under the <a href="https://opensource.org/licenses/MIT">MIT Open Source License</a>.</p>
         </footer>
 
-        <Particles className="Particles" params={{particles: {move: {speed: 0.2}}}} />
+        <Particles className="Particles" params={{
+          particles: {
+            twinkle: {
+              lines: {
+                enable: true,
+                color: "#9999ff",
+                frequency: .005,
+                opacity: 0.25
+              },
+              particles: {
+                enable: true,
+                color: "#ffffff",
+                frequency: .0001,
+                opacity: 1,
+                stroke: {
+                  width: 5,
+                  opacity: 1
+                }
+              }
+            },
+            move: {
+              speed: 0.15
+            },
+            color: {
+              value: "#009f00"
+            },
+            links: {color: "#009f00",
+            triangles: {
+              enable: true,
+              frequency: .1,
+              opacity: .05,
+              color: "#00ff00"
+            }
+            }
+          },
+          background: {
+            color: "#000000"
+          }
+        }} />
       </div>
     );
   }
