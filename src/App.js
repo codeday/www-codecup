@@ -117,7 +117,7 @@ class App extends Component
         </main>
 
         <footer className="Footer">
-          <p>A project of <a href="https://codeday.org">Code Day</a>. Licensed under the <a href="https://opensource.org/licenses/MIT">MIT Open Source License</a>.</p>
+          <p>A project of <a href="https://codeday.org">CodeDay</a>. Licensed under the <a href="https://opensource.org/licenses/MIT">MIT Open Source License</a>.</p>
         </footer>
 
         <Particles className="Particles" params={{particles: {move: {speed: 0.2}}}} />
