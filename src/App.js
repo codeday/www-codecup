@@ -88,7 +88,7 @@ class App extends Component
               <Menu className="Menu-icon" />
             </button>
             <img src={logo} className="Logo" alt="Code Cup Logo" />
-            <Glitch className="Title">Code Cup</Glitch>
+            <Glitch className="Title">CodeCup</Glitch>
           </div>
 
           <div className="Header-right">
