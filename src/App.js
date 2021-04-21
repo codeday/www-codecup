@@ -88,7 +88,7 @@ class App extends Component
               <Menu className="Menu-icon" />
             </button>
             <img src={logo} className="Logo" alt="Code Cup Logo" />
-            <Glitch className="Title">Code Cup</Glitch>
+            <Glitch className="Title">CodeCup</Glitch>
           </div>
 
           <div className="Header-right">
@@ -117,10 +117,48 @@ class App extends Component
         </main>
 
         <footer className="Footer">
-          <p>A project of <a href="https://codeday.org">Code Day</a>. Licensed under the <a href="https://opensource.org/licenses/MIT">MIT Open Source License</a>.</p>
+          <p>A project of <a href="https://codeday.org">CodeDay</a>. Licensed under the <a href="https://opensource.org/licenses/MIT">MIT Open Source License</a>.</p>
         </footer>
 
-        <Particles className="Particles" params={{particles: {move: {speed: 0.2}}}} />
+        <Particles className="Particles" params={{
+          particles: {
+            twinkle: {
+              lines: {
+                enable: true,
+                color: "#9999ff",
+                frequency: .005,
+                opacity: 0.25
+              },
+              particles: {
+                enable: true,
+                color: "#ffffff",
+                frequency: .0001,
+                opacity: 1,
+                stroke: {
+                  width: 5,
+                  opacity: 1
+                }
+              }
+            },
+            move: {
+              speed: 0.15
+            },
+            color: {
+              value: "#009f00"
+            },
+            links: {color: "#009f00",
+            triangles: {
+              enable: true,
+              frequency: .1,
+              opacity: .05,
+              color: "#00ff00"
+            }
+            }
+          },
+          background: {
+            color: "#000000"
+          }
+        }} />
       </div>
     );
   }
