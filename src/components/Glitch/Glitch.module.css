@@ -1,78 +1,81 @@
-/* Glitch animation - credit: https://css-tricks.com/glitch-effect-text-images-svg */
-@keyframes glitch {
+/* Glitch effects */
+@keyframes glitch-left {
   0% {
-    clip-path: inset(16% 0 32% 0);
+    text-shadow: 3px 0 0 #ff0000;
   }
-  5% {
-    clip-path: inset(87% 0 7% 0);
+  2% {
+    text-shadow: -5px 0 0 #ff0000;
   }
-  10% {
-    clip-path: inset(39% 0 5% 0);
+  4% {
+    text-shadow: -3px 0 0 #ff0000;
   }
-  15% {
-    clip-path: inset(29% 0 51% 0);
-  }
-  20% {
-    clip-path: inset(75% 0 8% 0);
-  }
-  25% {
-    clip-path: inset(91% 0 5% 0);
-  }
-  30% {
-    clip-path: inset(88% 0 12% 0);
-  }
-  35% {
-    clip-path: inset(59% 0 7% 0);
-  }
-  40% {
-    clip-path: inset(27% 0 30% 0);
-  }
-  45% {
-    clip-path: inset(71% 0 24% 0);
-  }
-  50% {
-    clip-path: inset(37% 0 30% 0);
-  }
-  55% {
-    clip-path: inset(53% 0 39% 0);
+  57% {
+    text-shadow: -3px 0 0 #ff0000;
   }
   60% {
-    clip-path: inset(50% 0 44% 0);
+    text-shadow: -10px 0 0 #ff0000;
   }
-  65% {
-    clip-path: inset(42% 0 22% 0);
-  }
-  70% {
-    clip-path: inset(92% 0 7% 0);
-  }
-  75% {
-    clip-path: inset(21% 0 50% 0);
-  }
-  80% {
-    clip-path: inset(61% 0 8% 0);
-  }
-  85% {
-    clip-path: inset(76% 0 20% 0);
-  }
-  90% {
-    clip-path: inset(50% 0 46% 0);
-  }
-  95% {
-    clip-path: inset(4% 0 50% 0);
+  63% {
+    text-shadow: 3px 0 0 #ff0000;
   }
   100% {
-    clip-path: inset(65% 0 31% 0);
+    text-shadow: 3px 0 0 #ff0000;
+  }
+}
+
+@keyframes glitch-right {
+  0% {
+    text-shadow: -3px 0 0 #00aeff;
+  }
+  2% {
+    text-shadow: 5px 0 0 #00aeff;
+  }
+  4% {
+    text-shadow: 3px 0 0 #00aeff;
+  }
+  57% {
+    text-shadow: 3px 0 0 #00aeff;
+  }
+  60% {
+    text-shadow: 10px 0 0 #00aeff;
+  }
+  63% {
+    text-shadow: -3px 0 0 #00aeff;
+  }
+  100% {
+    text-shadow: -3px 0 0 #00aeff;
+  }
+}
+
+/* CRT Scan-line effect */
+@keyframes scan-line {
+  59.999% {
+    clip-path: inset(0% 0 0% 0);
+    color: #ffffff;
+  }
+  60% {
+    clip-path: inset(0% 0 80% 0);
+    color: #00ff00;
+  }
+  65% {
+    clip-path: inset(80% 0 0% 0);
+    color: #00ff00;
+  }
+  65.001% {
+    clip-path: inset(0% 0 0% 0);
+    color: #ffffff;
   }
 }
 
 /* Normal text */
 .text {
+  animation: scan-line 20s infinite linear forwards;
   position: relative;
 }
 
 /* Shifted texts */
 .text::before, .text::after {
-  content: attr(text);
+  content: attr(data-text);
   position: absolute;
   display: block;
   height: 100%;
@@ -83,16 +86,12 @@
 
 /* Left-shifted text */
 .text::before {
-  animation: glitch 2s infinite linear alternate-reverse;
-  left: 2px;
+  animation: glitch-left 2s infinite linear forwards;
   opacity: 0.8;
-  text-shadow: -2px 0 var(--secondary);
 }
 
 /* Right-shifted text */
 .text::after {
-  animation: glitch 2s infinite linear alternate;
-  left: -2px;
+  animation: glitch-right 2s infinite linear alternate-reverse;
   opacity: 0.8;
-  text-shadow: -2px 0 var(--tertiary);
 }
