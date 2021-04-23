@@ -57,11 +57,11 @@
     clip-path: inset(0% 0 80% 0);
     color: #00ff00;
   }
-  65% {
+  70% {
     clip-path: inset(80% 0 0% 0);
     color: #00ff00;
   }
-  65.001% {
+  70.001% {
     clip-path: inset(0% 0 0% 0);
     color: #ffffff;
   }
@@ -69,7 +69,7 @@
 
 /* Normal text */
 .text {
-  animation: scan-line 20s infinite linear forwards;
+  animation: scan-line 12s infinite linear forwards;
   position: relative;
 }
 

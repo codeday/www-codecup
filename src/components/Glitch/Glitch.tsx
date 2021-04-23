@@ -1,14 +1,15 @@
-import {FC, HTMLAttributes} from 'react';
 import {Heading} from '@chakra-ui/layout';
+import React from 'react';
 import styles from './Glitch.module.css';
 
-interface GlitchProps extends HTMLAttributes<HTMLHeadingElement>
+interface GlitchProps
 {
+  className?: string;
   children: string;
   fontSize?: string;
 }
 
-const Glitch: FC<GlitchProps> = (props: GlitchProps) => (
+const Glitch: React.FC<GlitchProps> = (props: GlitchProps) => (
   <Heading
     data-text={props.children}
     className={styles.text + ' ' + props.className}
