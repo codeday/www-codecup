@@ -1,35 +1,12 @@
 /* CSS root */
 :root {
-  /* Theme colors */
-  --primary: #ff686b;
-  --secondary: #3ac2a4;
-  --tertiary: #2a86f7;
-  --accent: #151a29;
-}
-
-/* HTML body */
-body {
-  background-color: var(--accent);
-  color: #ffffff;
-  font-family: 'Open Sans', sans-serif;
+  position: relative;
   height: 100%;
-  left: 0;
-  margin: 0;
-  padding: 0;
+}
+
+/* React root */
+#root {
   position: absolute;
-  top: 0;
+  height: 100%;
   width: 100%;
-  z-index: -5;
-}
-
-/* Links */
-a {
-  color: var(--secondary)
-}
-
-/* Buttons */
-button {
-  border: none;
-  background-color: var(--secondary);
-  cursor: pointer;
 }

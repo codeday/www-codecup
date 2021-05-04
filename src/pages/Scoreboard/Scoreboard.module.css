@@ -1,0 +1,4 @@
+.Row > * {
+  border-color: var(--chakra-colors-gray-500) !important;
+  padding: 10px !important;
+}

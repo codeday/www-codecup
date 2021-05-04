@@ -1,14 +1,14 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import Glitch from './Glitch';
+import Footer from './Footer';
 
-describe('<Glitch />', () => {
+describe('<Footer />', () => {
   test('it should mount', () => {
-    render(<Glitch />);
+    render(<Footer />);
     
-    const glitch = screen.getByTestId('Glitch');
+    const footer = screen.getByTestId('Footer');
 
-    expect(glitch).toBeInTheDocument();
+    expect(footer).toBeInTheDocument();
   });
 });

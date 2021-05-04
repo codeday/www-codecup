@@ -1,0 +1,7 @@
+:80 {
+  # Filesystem location
+  root * /var/www
+
+  # Static file server
+  file_server 
+}

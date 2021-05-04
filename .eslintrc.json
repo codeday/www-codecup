@@ -1,0 +1,34 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "react-hooks"
+  ],
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "arrow-parens": [
+      "warn",
+      "as-needed"
+    ],
+    "camelcase": [
+      "warn",
+      {
+        "ignoreGlobals": true
+      }
+    ],
+    "curly": "warn",
+    "no-extra-semi": "warn",
+    "no-var": "error",
+    "object-curly-spacing": "warn",
+    "prefer-const": "warn",
+    "semi": "error",
+    "react/react-in-jsx-scope": "off"
+  }
+}
