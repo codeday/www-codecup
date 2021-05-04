@@ -1,7 +1,17 @@
+# Global options (See https://caddyserver.com/docs/caddyfile/options)
+{
+  # Disable the admin API
+  admin off
+}
+
+# Site options
 :80 {
+  # Single page application redirect
+  try_files {path} /index.html
+
   # Filesystem location
-  root * /var/www
+  root * {$STATIC}
 
   # Static file server
-  file_server 
+  file_server
 }

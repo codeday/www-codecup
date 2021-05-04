@@ -1,6 +1,19 @@
 # www-codecup
 New CodeCup website design, built off graphctf
 
+## Production
+
+### Building
+1. Build the Docker image:
+```bash
+docker build -t codeday/www-codecup:latest .
+```
+2. Run the image:
+```bash
+docker run -d -p 80:80 --name www-codecup codeday/www-codecup:latest
+```
+3. Access the site at `http://[CONTAINER IP]` (Port 80/HTTP)
+
 ## Development
 
 ### Create a new component
@@ -15,6 +28,13 @@ npx generate-react-cli component {Name}
 npx generate-react-cli component {Name} --type=page
 ```
 2. Add the route to [`routes.ts`](src/routes.ts)
+
+### Serve with Caddy
+1. Set the `STATIC` environment variable to the `build` directory
+2. Run Caddy with:
+```bash
+caddy run --config Caddyfile --adapter caddyfile
+```
 
 ## Theming
 

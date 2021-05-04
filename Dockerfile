@@ -29,6 +29,9 @@ COPY --chown=node:node --from=build /src/build .
 # Copy the Caddy config
 COPY Caddyfile /etc/caddy
 
+# Configure Caddy
+ENV STATIC=/var/www
+
 # Expose HTTP
 EXPOSE 80
 
