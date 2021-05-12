@@ -29,6 +29,12 @@ npx generate-react-cli component {Name} --type=page
 ```
 2. Add the route to [`routes.ts`](src/routes.ts)
 
+### Serve for development
+1. Start React with:
+```bash
+npm start
+```
+
 ### Serve with Caddy
 1. Set the `STATIC` environment variable to the `build` directory
 2. Run Caddy with:

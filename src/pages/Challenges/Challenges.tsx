@@ -1,7 +1,9 @@
-import {Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Flex, Grid, Heading, Input, InputGroup, InputLeftAddon, Stack, Text} from '@chakra-ui/react';
-import React, {ReactNode} from 'react';
-import {Globe, Image, Key, Search} from 'react-feather';
 import Challenge from '../../components/Challenge/Challenge';
+import Map from '../../components/Map/Map';
+import React from 'react';
+import {Box, Flex, Heading} from '@chakra-ui/react';
+import {Point} from 'react-simple-maps';
+import Search from '../../components/Search/Search';
 
 //TODO: remove this; this is just an example
 const exampleBody = `
@@ -28,13 +30,12 @@ adipiscing. Tempor nec feugiat nisl pretium fusce id velit.
 
 interface ChallengesProps
 {
-  categories: {
-    icon: ReactNode;
+  challenges: {
+    id: string;
     name: string;
-    challenges: {
-      name: string;
-      value: string;
-    }[];
+    value: number;
+    tags: string[];
+    coordinates: Point;
   }[];
 }
 
@@ -43,69 +44,44 @@ const Challenges: React.FC<ChallengesProps> = (props: ChallengesProps) => (
     <Box background="gray.800" padding="10px" rounded="xl" textAlign="center" width="70vw" >
       <Heading fontSize="4xl">Challenges</Heading>
 
-      <InputGroup margin="20px 0">
-        <InputLeftAddon>
-          <Search />
-        </InputLeftAddon>
-        <Input />
-      </InputGroup>
+      <Search items={props.challenges} />
 
-      <Accordion allowMultiple={true} allowToggle={true}>
-        {props.categories.map((category, categoryIndex) =>
-          <AccordionItem key={categoryIndex}>
-            <AccordionButton>
-              <Stack align="center" direction="row" width="100%">
-                {category.icon}
-                <Heading fontSize="2xl">{category.name}</Heading>
-                <AccordionIcon marginLeft="auto !important" />
-              </Stack>
-            </AccordionButton>
-
-            <AccordionPanel paddingTop="var(--chakra-space-5)">
-              <Grid gap={2} templateColumns="repeat(5, 1fr)" templateRows="repeat(1, 1fr)">
-                {category.challenges.map((challenge, challengeIndex) =>
-                  <Box background="gray.700" cursor="pointer" key={challengeIndex} padding="10px" rounded="xl" width="100%">
-                    <Text>{challenge.name}</Text>
-                    <Text>{challenge.value}</Text>
-                  </Box>
-                )}
-              </Grid>
-            </AccordionPanel>
-          </AccordionItem>
-        )}
-      </Accordion>
+      <Map markers={props.challenges} />
     </Box>
 
-    <Challenge name="Cryptography 1" body={exampleBody} isOpen={true}/>
+    <Challenge name="Cryptography 1" body={exampleBody} isOpen={true} />
   </Flex>
 );
 
 //TODO: remove this; this is just an example
 Challenges.defaultProps = {
-  categories: [
+  challenges: [
     {
-      icon: <Key />,
-      name: 'Cryptography',
-      challenges: Array(3).fill({
-        name: 'Cryptography Challenge',
-        value: 150
-      })
+      id: '4838e70f-4113-4869-a508-bc504d345472',
+      name: 'Cryptography 1',
+      value: 150,
+      tags: [
+        'Cryptography'
+      ],
+      coordinates: [-77.0365, 38.8977]
     },
     {
-      icon: <Image />,
-      name: 'Steganography',
-      challenges: Array(8).fill({
-        name: 'Steganography Challenge',
-        value: 500
-      })
+      id: '70c405a8-c7c7-4f28-a7fd-04d73a3ab18a',
+      name: 'Steganography 1',
+      value: 500,
+      tags: [
+        'Steganography'
+      ],
+      coordinates: [2.2945, 48.858222]
     },
     {
-      icon: <Globe />,
-      name: 'Web',
-      challenges: Array(20).fill({
-        name: 'Web Challenge',
-        value: 50
-      })
+      id: 'b7b1f035-a919-4c4f-8d9e-5990c148c3ba',
+      name: 'Web 1',
+      value: 50,
+      tags: [
+        'Web'
+      ],
+      coordinates: [31.132778, 29.976111]
     }
   ]
 };

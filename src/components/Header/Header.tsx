@@ -12,7 +12,7 @@ interface HeaderProps
 }
 
 const Header: React.FC<HeaderProps> = (props: HeaderProps) => (
-  <Flex align="center" as="header" justifyContent="space-between" padding="5" width="100%" wrap="wrap">
+  <Flex align="center" as="header" justifyContent="space-between" padding="5px" width="100%" wrap="wrap">
     <Link to="/">
       <Stack align="center" direction="row">
         <Box marginRight="20px">
