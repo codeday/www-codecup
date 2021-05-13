@@ -15,11 +15,14 @@
         "@types/react": "^17.0.3",
         "@types/react-dom": "^17.0.3",
         "@types/react-router-dom": "^5.1.7",
+        "chartjs-adapter-luxon": "^1.0.0",
         "d3-geo-projection": "^3.0.0",
         "framer-motion": "^4.1.6",
         "fuse.js": "^6.4.6",
+        "luxon": "^1.26.0",
         "prop-types": "^15.7.2",
         "react": "^17.0.2",
+        "react-chartjs-2": "^3.0.3",
         "react-dom": "^17.0.2",
         "react-feather": "^2.0.9",
         "react-markdown": "^6.0.0",
@@ -5954,6 +5957,21 @@
       "funding": {
         "type": "github",
         "url": "https://github.com/sponsors/wooorm"
+      }
+    },
+    "node_modules/chart.js": {
+      "version": "3.2.1",
+      "resolved": "https://registry.npmjs.org/chart.js/-/chart.js-3.2.1.tgz",
+      "integrity": "sha512-XsNDf3854RGZkLCt+5vWAXGAtUdKP2nhfikLGZqud6G4CvRE2ts64TIxTTfspOin2kEZvPgomE29E6oU02dYjQ==",
+      "peer": true
+    },
+    "node_modules/chartjs-adapter-luxon": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/chartjs-adapter-luxon/-/chartjs-adapter-luxon-1.0.0.tgz",
+      "integrity": "sha512-oy4iH4o6+8FqDoHYsEmUAB8+q8QO+vERDDHkmODm+MwWW1cet02wHN2KYvidwgBLYUX0laNWaWGN7l8Thac2Zg==",
+      "peerDependencies": {
+        "chart.js": "^3.0.0",
+        "luxon": "^1.0.0"
       }
     },
     "node_modules/check-types": {
@@ -13208,6 +13226,14 @@
         "node": ">=10"
       }
     },
+    "node_modules/luxon": {
+      "version": "1.26.0",
+      "resolved": "https://registry.npmjs.org/luxon/-/luxon-1.26.0.tgz",
+      "integrity": "sha512-+V5QIQ5f6CDXQpWNICELwjwuHdqeJM1UenlZWx5ujcRMc9venvluCjFb4t5NYLhb6IhkbMVOxzVuOqkgMxee2A==",
+      "engines": {
+        "node": "*"
+      }
+    },
     "node_modules/lz-string": {
       "version": "1.4.4",
       "resolved": "https://registry.npmjs.org/lz-string/-/lz-string-1.4.4.tgz",
@@ -16451,6 +16477,18 @@
       },
       "engines": {
         "node": ">=10"
+      }
+    },
+    "node_modules/react-chartjs-2": {
+      "version": "3.0.3",
+      "resolved": "https://registry.npmjs.org/react-chartjs-2/-/react-chartjs-2-3.0.3.tgz",
+      "integrity": "sha512-jOFZKwZ8sMLkddewZ/tToxuu4pYimAvvY5I6uK+hCpSFT16Pvo2bdHhUoZ0X87zu9I+dx2I+JCqaLN6XhmrbDg==",
+      "dependencies": {
+        "lodash": "^4.17.19"
+      },
+      "peerDependencies": {
+        "chart.js": "^3.1.0",
+        "react": "^16.8.0 || ^17.0.0"
       }
     },
     "node_modules/react-clientside-effect": {
@@ -27578,6 +27616,18 @@
       "resolved": "https://registry.npmjs.org/character-reference-invalid/-/character-reference-invalid-1.1.4.tgz",
       "integrity": "sha512-mKKUkUbhPpQlCOfIuZkvSEgktjPFIsZKRRbC6KWVEMvlzblj3i3asQv5ODsrwt0N3pHAEvjP8KTQPHkp0+6jOg=="
     },
+    "chart.js": {
+      "version": "3.2.1",
+      "resolved": "https://registry.npmjs.org/chart.js/-/chart.js-3.2.1.tgz",
+      "integrity": "sha512-XsNDf3854RGZkLCt+5vWAXGAtUdKP2nhfikLGZqud6G4CvRE2ts64TIxTTfspOin2kEZvPgomE29E6oU02dYjQ==",
+      "peer": true
+    },
+    "chartjs-adapter-luxon": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/chartjs-adapter-luxon/-/chartjs-adapter-luxon-1.0.0.tgz",
+      "integrity": "sha512-oy4iH4o6+8FqDoHYsEmUAB8+q8QO+vERDDHkmODm+MwWW1cet02wHN2KYvidwgBLYUX0laNWaWGN7l8Thac2Zg==",
+      "requires": {}
+    },
     "check-types": {
       "version": "11.1.2",
       "resolved": "https://registry.npmjs.org/check-types/-/check-types-11.1.2.tgz",
@@ -33254,6 +33304,11 @@
         "yallist": "^4.0.0"
       }
     },
+    "luxon": {
+      "version": "1.26.0",
+      "resolved": "https://registry.npmjs.org/luxon/-/luxon-1.26.0.tgz",
+      "integrity": "sha512-+V5QIQ5f6CDXQpWNICELwjwuHdqeJM1UenlZWx5ujcRMc9venvluCjFb4t5NYLhb6IhkbMVOxzVuOqkgMxee2A=="
+    },
     "lz-string": {
       "version": "1.4.4",
       "resolved": "https://registry.npmjs.org/lz-string/-/lz-string-1.4.4.tgz",
@@ -35847,6 +35902,14 @@
         "raf": "^3.4.1",
         "regenerator-runtime": "^0.13.7",
         "whatwg-fetch": "^3.4.1"
+      }
+    },
+    "react-chartjs-2": {
+      "version": "3.0.3",
+      "resolved": "https://registry.npmjs.org/react-chartjs-2/-/react-chartjs-2-3.0.3.tgz",
+      "integrity": "sha512-jOFZKwZ8sMLkddewZ/tToxuu4pYimAvvY5I6uK+hCpSFT16Pvo2bdHhUoZ0X87zu9I+dx2I+JCqaLN6XhmrbDg==",
+      "requires": {
+        "lodash": "^4.17.19"
       }
     },
     "react-clientside-effect": {
