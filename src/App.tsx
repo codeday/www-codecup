@@ -1,7 +1,6 @@
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {FC} from 'react';
-import {Flex} from '@chakra-ui/layout';
-import {useToken} from '@chakra-ui/system';
+import {Flex, useToken} from '@chakra-ui/react';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Particles, {IParticlesParams} from 'react-particles-js';

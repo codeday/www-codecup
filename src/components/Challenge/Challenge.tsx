@@ -1,8 +1,6 @@
-import {Button} from '@chakra-ui/button';
-import {Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay} from '@chakra-ui/modal';
-import {useDisclosure} from '@chakra-ui/hooks';
 import React, {useEffect} from 'react';
 import ReactMarkdown from 'react-markdown';
+import {Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure} from '@chakra-ui/react';
 
 interface ChallengeProps
 {

@@ -1,5 +1,4 @@
-import {Button} from '@chakra-ui/button';
-import {Flex, Heading, Stack, Text} from '@chakra-ui/layout';
+import {Button, Flex, Heading, Stack, Text} from '@chakra-ui/react';
 import {Home} from 'react-feather';
 import React from 'react';
 import {Link} from 'react-router-dom';

@@ -1,10 +1,9 @@
 import 'chartjs-adapter-luxon';
 import React from 'react';
 import styles from './Scoreboard.module.css';
-import {Box, Flex, Heading} from '@chakra-ui/layout';
+import {Box, Flex, Heading, Table, Tbody, Td, Tfoot, Th, Thead, Tr} from '@chakra-ui/react';
 import {ChartOptions, ChartData} from 'chart.js/types/index.esm';
 import {Line} from 'react-chartjs-2';
-import {Table, Tbody, Td, Tfoot, Th, Thead, Tr} from '@chakra-ui/table';
 
 /**
  * Options for the graph

@@ -1,7 +1,7 @@
+import Fuse from 'fuse.js';
 import React, {FormEvent, useState} from 'react';
 import {Input, InputGroup, InputLeftAddon, List, ListItem, Popover, PopoverContent, PopoverTrigger} from '@chakra-ui/react';
 import {Search as SearchIcon} from 'react-feather';
-import Fuse from 'fuse.js';
 
 interface Item
 {
