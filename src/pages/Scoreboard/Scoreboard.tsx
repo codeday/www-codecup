@@ -65,8 +65,8 @@ const Scoreboard: React.FC<ScoreboardProps> = (props: ScoreboardProps) =>
             </Tr>
           </Thead>
           <Tbody width="100%">
-            {props.teams.map((team, index) =>
-              <Tr className={styles.Row} key={index}>
+            {props.teams.map(team =>
+              <Tr className={styles.Row} key={team.name}>
                 <Td>{team.name}</Td>
                 <Td isNumeric>{team.scores[team.scores.length - 1].value}</Td>
               </Tr>
