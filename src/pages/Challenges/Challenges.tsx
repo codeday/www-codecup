@@ -1,9 +1,9 @@
 import Challenge from '../../components/Challenge/Challenge';
 import Map from '../../components/Map/Map';
-import React from 'react';
+import React, {useState} from 'react';
+import Search from '../../components/Search/Search';
 import {Box, Flex, Heading} from '@chakra-ui/react';
 import {Point} from 'react-simple-maps';
-import Search from '../../components/Search/Search';
 
 //TODO: remove this; this is just an example
 const exampleBody = `
@@ -28,6 +28,11 @@ ultricies mi eget. Sapien eget mi proin sed libero. Et tortor at risus viverra
 adipiscing. Tempor nec feugiat nisl pretium fusce id velit.
 `;
 
+/**
+ * How far to zoom in to a location when searched and selected
+ */
+const locationZoom = 4;
+
 interface ChallengesProps
 {
   challenges: {
@@ -39,19 +44,44 @@ interface ChallengesProps
   }[];
 }
 
-const Challenges: React.FC<ChallengesProps> = (props: ChallengesProps) => (
-  <Flex align="center" data-testid="NotFound">
-    <Box background="gray.800" padding="10px" rounded="xl" textAlign="center" width="70vw" >
-      <Heading fontSize="4xl">Challenges</Heading>
+const Challenges: React.FC<ChallengesProps> = (props: ChallengesProps) =>
+{
+  //Map state
+  const [location, setLocation] = useState<Point>([0, 0]);
+  const [zoom, setZoom] = useState<number>(1);
 
-      <Search items={props.challenges} />
+  //Search item selected handler
+  const itemSelected = (id: string) =>
+  {
+    //Find the item by its ID
+    const item = props.challenges.find(item => item.id == id);
 
-      <Map markers={props.challenges} />
-    </Box>
+    if (item == null)
+    {
+      throw new Error(`Failed to find item ${id}`);
+    }
 
-    <Challenge name="Cryptography 1" body={exampleBody} isOpen={true} />
-  </Flex>
-);
+    //Update the location
+    setLocation(item.coordinates);
+
+    //Update the zoom
+    setZoom(locationZoom);
+  };
+
+  return (
+    <Flex align="center" data-testid="NotFound">
+      <Box background="gray.800" padding="10px" rounded="xl" textAlign="center" width="70vw" >
+        <Heading fontSize="4xl">Challenges</Heading>
+
+        <Search items={props.challenges} itemSelected={itemSelected} />
+
+        <Map center={location} markers={props.challenges} zoom={zoom} />
+      </Box>
+
+      <Challenge name="Cryptography 1" body={exampleBody} isOpen={true} />
+    </Flex>
+  );
+};
 
 //TODO: remove this; this is just an example
 Challenges.defaultProps = {

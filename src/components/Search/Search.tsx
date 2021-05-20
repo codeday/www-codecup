@@ -1,7 +1,7 @@
 import Fuse from 'fuse.js';
-import React, {FormEvent, useState} from 'react';
-import {Input, InputGroup, InputLeftAddon, List, ListItem, Popover, PopoverContent, PopoverTrigger} from '@chakra-ui/react';
-import {Search as SearchIcon} from 'react-feather';
+import React, {useEffect, useState} from 'react';
+import {Button, Input, InputGroup, InputLeftAddon, InputRightAddon, List, ListItem, Popover, PopoverContent, PopoverTrigger} from '@chakra-ui/react';
+import {X as CloseIcon, Search as SearchIcon} from 'react-feather';
 
 interface Item
 {
@@ -12,6 +12,7 @@ interface Item
 
 interface SearchProps
 {
+  itemSelected: (id: string) => void;
   items: Item[];
   maxItems?: number;
 }
@@ -19,14 +20,21 @@ interface SearchProps
 const Search: React.FC<SearchProps> = (props: SearchProps) =>
 {
   //React state
+  const [query, setQuery] = useState('');
   const [handler, setHandler] = useState<number>();
   const [items, setItems] = useState<Item[]>();
-  const [popupOpen, setPopupOpen] = useState(false);
+  const [suggestionsVisible, setSuggestionsVisible] = useState(false);
 
-  //Popup manipulation functions
-  const closePopup = () =>
+  //Close suggestions
+  const closeSuggestions = () =>
   {
-    setPopupOpen(false);
+    setSuggestionsVisible(false);
+  };
+
+  //Clear query
+  const clearQuery = () =>
+  {
+    setQuery('');
   };
 
   //Instantiate Fuse
@@ -36,11 +44,8 @@ const Search: React.FC<SearchProps> = (props: SearchProps) =>
   });
 
   //Search for the item
-  const search = (event: FormEvent) =>
+  useEffect(() =>
   {
-    //Set the value
-    const query = (event.target as HTMLInputElement).value;
-
     //Clear existing timeouts
     window.clearTimeout(handler);
 
@@ -63,28 +68,66 @@ const Search: React.FC<SearchProps> = (props: SearchProps) =>
         //Update the items
         setItems(results.map(result => result.item));
       }
-
-      //Show the popup
-      setPopupOpen(true);
     }, 450));
+  }, [query]);
+
+  //Hide the suggestions if no items are available
+  useEffect(() =>
+  {
+    if (items != null && items.length > 0)
+    {
+      setSuggestionsVisible(true);
+    }
+    else
+    {
+      setSuggestionsVisible(false);
+    }
+  }, [items]);
+
+  //Item selected handler
+  const itemSelected = (id: string) => () =>
+  {
+    //Close suggestions
+    setSuggestionsVisible(false);
+
+    //Invoke parent handler
+    props.itemSelected(id);
   };
 
   return (
-    <Popover autoFocus={false} placement="bottom-start" isOpen={popupOpen} onClose={closePopup}>
+    <Popover autoFocus={false} placement="bottom-start" isOpen={suggestionsVisible} onClose={closeSuggestions}>
       <PopoverTrigger>
         <InputGroup margin="20px 0">
           <InputLeftAddon>
             <SearchIcon />
           </InputLeftAddon>
-          <Input onChange={search} />
+
+          <Input onChange={event => setQuery(event.target.value)} value={query} />
+
+          {query.length > 0 &&
+            <InputRightAddon padding={0}>
+              <Button onClick={clearQuery} roundedStart={0}>
+                <CloseIcon />
+              </Button>
+            </InputRightAddon>
+          }
         </InputGroup>
       </PopoverTrigger>
 
       <PopoverContent>
-        <List padding="5px 0" spacing={3}>
-          {items?.map(item =>
+        <List>
+          {items?.map((item, index) =>
             <ListItem key={item.id}>
-              {item.name}
+              <Button
+                height="45px"
+                onClick={itemSelected(item.id)}
+                roundedBottom={index == items.length - 1 ? 'md' : 0}
+                roundedTop={index == 0 ? 'md' : 0}
+                variant="ghost"
+                width="100%"
+              >
+                {item.name}
+              </Button>
             </ListItem>
           )}
         </List>
