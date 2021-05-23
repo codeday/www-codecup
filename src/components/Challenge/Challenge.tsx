@@ -1,12 +1,14 @@
-import React, {useEffect} from 'react';
-import ReactMarkdown from 'react-markdown';
-import {Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure} from '@chakra-ui/react';
+//Imports
+import Markdown from '../Markdown/Markdown';
+import React, {useEffect, useState} from 'react';
+import {Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure} from '@chakra-ui/react';
 
 interface ChallengeProps
 {
   name: string;
-  body: string;
+  text: string;
   isOpen: boolean;
+  onSubmit: (flag: string) => void;
 }
 
 const Challenge: React.FC<ChallengeProps> = (props: ChallengeProps) =>
@@ -25,6 +27,16 @@ const Challenge: React.FC<ChallengeProps> = (props: ChallengeProps) =>
     }
   }, [props.isOpen]);
 
+  //Flag state
+  const [flag, setFlag] = useState('');
+
+  //Submit handler
+  const onSubmit = () =>
+  {
+    //Call parent handler
+    props.onSubmit(flag);
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -32,12 +44,13 @@ const Challenge: React.FC<ChallengeProps> = (props: ChallengeProps) =>
         <ModalHeader textAlign="center">{props.name}</ModalHeader>
         <ModalCloseButton />
 
-        <ModalBody>
-          <ReactMarkdown>{props.body}</ReactMarkdown>
+        <ModalBody padding='16px'>
+          <Markdown text={props.text}/>
         </ModalBody>
 
-        <ModalFooter>
-          <Button onClick={onClose}>Close</Button>
+        <ModalFooter padding='16px'>
+          <Input onChange={event => setFlag(event.target.value)} placeholder='Flag' value={flag} />
+          <Button colorScheme='primary' onClick={onSubmit} marginLeft='16px'>Submit</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

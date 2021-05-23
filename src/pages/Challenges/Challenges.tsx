@@ -5,29 +5,6 @@ import Search from '../../components/Search/Search';
 import {Box, Flex, Heading} from '@chakra-ui/react';
 import {Point} from 'react-simple-maps';
 
-//TODO: remove this; this is just an example
-const exampleBody = `
-# H1
-## H2
-### H3
-#### H4
-##### H5
-###### H6
-
-[Link](https://example.com)
-
-![Alt](https://via.placeholder.com/350x150)
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Proin libero nunc consequat interdum
-varius. Aenean et tortor at risus viverra adipiscing at. Scelerisque eu ultrices
-vitae auctor. Non nisi est sit amet. A scelerisque purus semper eget duis at
-tellus at urna. Odio ut enim blandit volutpat. Nisl pretium fusce id velit ut.
-Viverra accumsan in nisl nisi scelerisque eu ultrices vitae. Diam maecenas
-ultricies mi eget. Sapien eget mi proin sed libero. Et tortor at risus viverra
-adipiscing. Tempor nec feugiat nisl pretium fusce id velit.
-`;
-
 /**
  * How far to zoom in to a location when searched and selected
  */
@@ -41,6 +18,7 @@ interface ChallengesProps
     value: number;
     tags: string[];
     coordinates: Point;
+    text: string;
   }[];
 }
 
@@ -68,6 +46,13 @@ const Challenges: React.FC<ChallengesProps> = (props: ChallengesProps) =>
     setZoom(locationZoom);
   };
 
+  //Submission handler
+  const onSubmit = (flag: string) =>
+  {
+    //TODO: replace with API call
+    alert(`Submission: ${flag}`);
+  };
+
   return (
     <Flex align="center" data-testid="NotFound">
       <Box background="gray.800" padding="10px" rounded="xl" textAlign="center" width="70vw" >
@@ -78,7 +63,7 @@ const Challenges: React.FC<ChallengesProps> = (props: ChallengesProps) =>
         <Map center={location} markers={props.challenges} zoom={zoom} />
       </Box>
 
-      <Challenge name="Cryptography 1" body={exampleBody} isOpen={true} />
+      <Challenge name="Cryptography 1" text={props.challenges[0].text} isOpen={true} onSubmit={onSubmit} />
     </Flex>
   );
 };
@@ -93,7 +78,56 @@ Challenges.defaultProps = {
       tags: [
         'Cryptography'
       ],
-      coordinates: [-77.0365, 38.8977]
+      coordinates: [-77.0365, 38.8977],
+      text: `
+# Cryptography
+# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+
+* Unordered list item 1
+* Unordered list item 2
+* Unordered list item 3
+
+---
+
+1. Ordered list item 1
+2. Ordered list item 2
+3. Ordered list item 3
+
+[Link](https://example.com)
+
+![Alt](https://via.placeholder.com/350x150)
+
+\`Inline code block\`
+
+\`\`\`javascript
+//Single-line comment
+const arrowFunction = () => null;
+
+/* Multi-
+line comment */
+function normalFunction()
+{
+  return null;
+}
+
+var a = 0;
+let b = 1;
+const c = 2;
+\`\`\`
+
+Column 1 | Column 2 | Column 3
+--- | --- | ---
+Row 1 | Row 1 | Row 1
+Row 2 | Row 2 | Row 2
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Proin libero nunc consequat interdum
+varius. Aenean et tortor at risus viverra adipiscing at.`
     },
     {
       id: '70c405a8-c7c7-4f28-a7fd-04d73a3ab18a',
@@ -102,7 +136,10 @@ Challenges.defaultProps = {
       tags: [
         'Steganography'
       ],
-      coordinates: [2.2945, 48.858222]
+      coordinates: [2.2945, 48.858222],
+      text: `
+*Check \`Cryptography 1\` for a full markdown sample*
+`
     },
     {
       id: 'b7b1f035-a919-4c4f-8d9e-5990c148c3ba',
@@ -111,7 +148,10 @@ Challenges.defaultProps = {
       tags: [
         'Web'
       ],
-      coordinates: [31.132778, 29.976111]
+      coordinates: [31.132778, 29.976111],
+      text: `
+*Check \`Cryptography 1\` for a full markdown sample*
+`
     }
   ]
 };

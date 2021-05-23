@@ -18,6 +18,7 @@
     "@types/react-dom": "^17.0.3",
     "@types/react-router-dom": "^5.1.7",
     "@types/react-simple-maps": "^1.0.3",
+    "chakra-ui-markdown-renderer": "^3.0.1",
     "chart.js": "^3.2.1",
     "chartjs-adapter-luxon": "^1.0.0",
     "d3-geo-projection": "^3.0.0",
@@ -35,11 +36,14 @@
     "react-scripts": "^4.0.3",
     "react-simple-maps": "^2.3.0",
     "react-spring": "^9.1.2",
+    "react-syntax-highlighter": "^15.4.3",
+    "remark-gfm": "^1.0.0",
     "typescript": "^4.2.4"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
+    "@types/react-syntax-highlighter": "^13.5.0",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "eslint": "^7.24.0",
