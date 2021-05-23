@@ -2,7 +2,7 @@ import Challenge from '../../components/Challenge/Challenge';
 import Map from '../../components/Map/Map';
 import React, {useState} from 'react';
 import Search from '../../components/Search/Search';
-import {Box, Flex, Heading} from '@chakra-ui/react';
+import {Box, Flex, Heading, useDisclosure} from '@chakra-ui/react';
 import {Point} from 'react-simple-maps';
 
 /**
@@ -10,40 +10,71 @@ import {Point} from 'react-simple-maps';
  */
 const locationZoom = 4;
 
+export interface Challenge
+{
+  id: string;
+  name: string;
+  value: number;
+  tags: string[];
+  coordinates: Point;
+  text: string;
+}
+
 interface ChallengesProps
 {
-  challenges: {
-    id: string;
-    name: string;
-    value: number;
-    tags: string[];
-    coordinates: Point;
-    text: string;
-  }[];
+  challenges: Challenge[];
 }
 
 const Challenges: React.FC<ChallengesProps> = (props: ChallengesProps) =>
 {
   //Map state
   const [location, setLocation] = useState<Point>([0, 0]);
-  const [zoom, setZoom] = useState<number>(1);
+  const [zoom, setZoom] = useState<number>(0);
 
   //Search item selected handler
   const itemSelected = (id: string) =>
   {
-    //Find the item by its ID
-    const item = props.challenges.find(item => item.id == id);
+    //Find the challenge by its ID
+    const challenge = props.challenges.find(challenge => challenge.id == id);
 
-    if (item == null)
+    if (challenge == null)
     {
-      throw new Error(`Failed to find item ${id}`);
+      throw new Error(`Failed to find challenge ${id}`);
     }
 
     //Update the location
-    setLocation(item.coordinates);
+    setLocation(challenge.coordinates);
 
     //Update the zoom
     setZoom(locationZoom);
+
+    //Update the challenge
+    setChallenge(challenge);
+
+    //Open the modal
+    onOpen();
+  };
+
+  //Challenge state
+  const {isOpen, onClose, onOpen} = useDisclosure();
+  const [challenge, setChallenge] = useState<Challenge>();
+
+  //Marker selected handler
+  const markerSelected = (id: string) =>
+  {
+    //Find the challenge by its ID
+    const challenge = props.challenges.find(challenge => challenge.id == id);
+
+    if (challenge == null)
+    {
+      throw new Error(`Failed to find challenge ${id}`);
+    }
+
+    //Update the challenge
+    setChallenge(challenge);
+
+    //Open the modal
+    onOpen();
   };
 
   //Submission handler
@@ -60,10 +91,10 @@ const Challenges: React.FC<ChallengesProps> = (props: ChallengesProps) =>
 
         <Search items={props.challenges} itemSelected={itemSelected} />
 
-        <Map center={location} markers={props.challenges} zoom={zoom} />
+        <Map center={location} markers={props.challenges} markerSelected={markerSelected} zoom={zoom} />
       </Box>
 
-      <Challenge name="Cryptography 1" text={props.challenges[0].text} isOpen={true} onSubmit={onSubmit} />
+      <Challenge name={challenge?.name || ''} text={challenge?.text || ''} isOpen={isOpen} onClose={onClose} onSubmit={onSubmit} />
     </Flex>
   );
 };

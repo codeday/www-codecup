@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, {MouseEventHandler, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ComposableMap, Geographies, Geography, Marker, Point, ProjectionConfig, ZoomableGroup} from 'react-simple-maps';
 import {animated, config, useSpring} from 'react-spring';
 import {geoCylindricalStereographic} from 'd3-geo-projection';
@@ -45,11 +45,13 @@ interface MapProps
   zoom: number;
 
   markers: {
+    id: string;
     name: string;
     coordinates: Point;
   }[];
 
-  onClick?: MouseEventHandler;
+  markerSelected: (id: string) => void;
+
   onMouseEnter?: (event: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
   onMouseLeave?: (event: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
 }
@@ -62,10 +64,12 @@ const Map: React.FC<MapProps> = (props: MapProps) =>
   //Get certain values from the current Chakra theme
   const [
     geoFill,
+    markerOutline,
     markerFill
-  ] = useToken("colors", [
-    "primary.300",
-    "secondary.400"
+  ] = useToken('colors', [
+    'primary.300',
+    'red.400',
+    'red.800'
   ]);
 
   /**
@@ -144,6 +148,13 @@ const Map: React.FC<MapProps> = (props: MapProps) =>
     }
   });
 
+  //Marker selected handler
+  const markerSelected = (id: string) => () =>
+  {
+    //Invoke parent handler
+    props.markerSelected(id);
+  };
+
   return (
     <ComposableMap projection={projection} projectionConfig={projectionConfig} height={350}>
       <AnimatedZoomableGroup center={center as any} onMoveEnd={updateAnimation} translateExtent={translateExtend} zoom={zoom}>
@@ -152,7 +163,6 @@ const Map: React.FC<MapProps> = (props: MapProps) =>
             <Geography
               key={geo.rsmKey}
               geography={geo}
-              onClick={props.onClick}
               onMouseEnter={props.onMouseEnter}
               onMouseLeave={props.onMouseLeave}
               style={geoStyle}
@@ -162,8 +172,9 @@ const Map: React.FC<MapProps> = (props: MapProps) =>
 
         {props.markers.map(marker =>
           <Marker key={marker.name} coordinates={marker.coordinates}>
-            <g fill={markerFill} fillRule="evenodd">
-              <path d="M0 0C-3-3-5-6-5-9A1 1 0 015-9C5-6 3-3 0 0ZM0-5.75A1 1 0 000-12A1 1 0 000-5.75Z" />
+            <g cursor='pointer' fillRule='evenodd' onClick={markerSelected(marker.id)}>
+              <path fill={markerOutline} d='M -6 0 L 0 -10 L 6 0 L -6 0 Z M -3 -2 L 0 -7 L 3 -2 L -3 -2 Z' />
+              <path fill={markerFill} d='M -3 -2 L 0 -7 L 3 -2 L -3 -2 Z' />
             </g>
           </Marker>
         )}

@@ -1,32 +1,21 @@
 //Imports
 import Markdown from '../Markdown/Markdown';
-import React, {useEffect, useState} from 'react';
-import {Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure} from '@chakra-ui/react';
+import React, {useState} from 'react';
+import {Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay} from '@chakra-ui/react';
 
 interface ChallengeProps
 {
   name: string;
   text: string;
+  
   isOpen: boolean;
+  onClose: () => void;
+
   onSubmit: (flag: string) => void;
 }
 
 const Challenge: React.FC<ChallengeProps> = (props: ChallengeProps) =>
 {
-  //Modal state
-  const {isOpen, onClose, onOpen} = useDisclosure();
-  useEffect(() =>
-  {
-    if (props.isOpen)
-    {
-      onOpen();
-    }
-    else
-    {
-      onClose();
-    }
-  }, [props.isOpen]);
-
   //Flag state
   const [flag, setFlag] = useState('');
 
@@ -38,7 +27,7 @@ const Challenge: React.FC<ChallengeProps> = (props: ChallengeProps) =>
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={props.isOpen} onClose={props.onClose}>
       <ModalOverlay />
       <ModalContent minWidth="60vw">
         <ModalHeader textAlign="center">{props.name}</ModalHeader>
