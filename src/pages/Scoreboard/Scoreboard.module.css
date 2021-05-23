@@ -1,4 +1,10 @@
-.Row > * {
+/* Graph */
+.graph {
+  width: 60vw;
+}
+
+/* Table row */
+.row > * {
   border-color: var(--chakra-colors-gray-500) !important;
   padding: 10px !important;
 }

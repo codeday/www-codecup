@@ -9,13 +9,6 @@ import styles from './App.module.css';
 
 const App: FC = () =>
 {
-  //Get certain values from the current Chakra theme
-  const [
-    background
-  ] = useToken("colors", [
-    "gray.900"
-  ]);
-
   //ParticlesJS config
   const particles: IParticlesParams = {
     particles: {
@@ -50,7 +43,7 @@ const App: FC = () =>
       }
     },
     background: {
-      color: background
+      color: useToken('colors', 'gray.900')
     }
   };
 

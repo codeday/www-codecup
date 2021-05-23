@@ -52,7 +52,7 @@ const Code: React.FC<CodeProps> = (props: CodeProps) =>
     return (
       <div>
         <div style={{position: 'relative'}}>
-          <Button colorScheme={isCopied ? 'green' : 'primary'} display='inline-block' margin='10px' onClick={onCopy} position='absolute' right={0} transitionDuration='500ms'>
+          <Button colorScheme={isCopied ? 'green' : 'primary'} display='inline-block' margin='10px' onClick={onCopy} position='absolute' right={0} transitionDuration='var(--chakra-transition-duration-ultra-slow)'>
             {isCopied ? <CheckSquare /> : <Copy />}
           </Button>
         </div>
