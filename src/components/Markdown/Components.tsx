@@ -84,7 +84,7 @@ const components = {
   hr: () => <Divider borderBottomWidth='2px' />,
 
   //Link
-  a: props => <Link textDecoration='underline'>{props.children}</Link>,
+  a: props => <Link textDecoration='underline' {...props}>{props.children}</Link>,
 
   //Image
   img: Image,

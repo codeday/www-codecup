@@ -52,13 +52,8 @@ const Search: React.FC<SearchProps> = (props: SearchProps) =>
     //Wait 100ms before performing the search (Will be cancelled if use changes query)
     setHandler(window.setTimeout(() =>
     {
-      //If query is empty, show max items
-      if (query == '')
-      {
-        setItems(props.items.length > props.maxItems! ? props.items.slice(0, props.maxItems!) : props.items);
-      }
-      //Otherwise search for the items
-      else
+      //If the query isn't empty, search for items
+      if (query != '')
       {
         //Search
         const results = fuse.search(query, {

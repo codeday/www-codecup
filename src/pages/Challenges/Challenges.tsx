@@ -1,5 +1,5 @@
 import Challenge from '../../components/Challenge/Challenge';
-import Map from '../../components/Map/Map';
+import Map, {Transform} from '../../components/Map/Map';
 import React, {useState} from 'react';
 import Search from '../../components/Search/Search';
 import {Box, Flex, Heading, useDisclosure} from '@chakra-ui/react';
@@ -27,40 +27,25 @@ interface ChallengesProps
 
 const Challenges: React.FC<ChallengesProps> = (props: ChallengesProps) =>
 {
-  //Map state
-  const [location, setLocation] = useState<Point>([0, 0]);
-  const [zoom, setZoom] = useState<number>(0);
+  //Map transformation
+  const [transform, setTransform] = useState<Transform>({
+    coordinates: [0, 0],
+    zoom: 1
+  });
 
-  //Search item selected handler
-  const itemSelected = (id: string) =>
+  //Map transform handler
+  const onTransform = (newTransform: Transform) =>
   {
-    //Find the challenge by its ID
-    const challenge = props.challenges.find(challenge => challenge.id == id);
-
-    if (challenge == null)
-    {
-      throw new Error(`Failed to find challenge ${id}`);
-    }
-
-    //Update the location
-    setLocation(challenge.coordinates);
-
-    //Update the zoom
-    setZoom(locationZoom);
-
-    //Update the challenge
-    setChallenge(challenge);
-
-    //Open the modal
-    onOpen();
+    //Update transform
+    setTransform(newTransform);
   };
 
   //Challenge state
   const {isOpen, onClose, onOpen} = useDisclosure();
   const [challenge, setChallenge] = useState<Challenge>();
 
-  //Marker selected handler
-  const markerSelected = (id: string) =>
+  //Challenge selected handler
+  const challengeSelected = (id: string) =>
   {
     //Find the challenge by its ID
     const challenge = props.challenges.find(challenge => challenge.id == id);
@@ -69,6 +54,12 @@ const Challenges: React.FC<ChallengesProps> = (props: ChallengesProps) =>
     {
       throw new Error(`Failed to find challenge ${id}`);
     }
+
+    //Update the transform
+    setTransform({
+      coordinates: challenge.coordinates,
+      zoom: locationZoom
+    });
 
     //Update the challenge
     setChallenge(challenge);
@@ -89,9 +80,9 @@ const Challenges: React.FC<ChallengesProps> = (props: ChallengesProps) =>
       <Box background="gray.800" padding="10px" rounded="xl" textAlign="center" width="70vw" >
         <Heading fontSize="4xl">Challenges</Heading>
 
-        <Search items={props.challenges} itemSelected={itemSelected} />
+        <Search items={props.challenges} itemSelected={challengeSelected} />
 
-        <Map center={location} markers={props.challenges} markerSelected={markerSelected} zoom={zoom} />
+        <Map markers={props.challenges} markerSelected={challengeSelected} onTransform={onTransform} transform={transform} />
       </Box>
 
       <Challenge name={challenge?.name || ''} text={challenge?.text || ''} isOpen={isOpen} onClose={onClose} onSubmit={onSubmit} />

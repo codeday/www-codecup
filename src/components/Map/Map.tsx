@@ -33,7 +33,7 @@ const translateExtend = [
     [number, number]
   ];
 
-interface MoveEvent
+export interface Transform
 {
   coordinates: Point;
   zoom: number;
@@ -41,8 +41,8 @@ interface MoveEvent
 
 interface MapProps
 {
-  center: Point;
-  zoom: number;
+  transform: Transform;
+  onTransform: (transform: Transform) => void;
 
   markers: {
     id: string;
@@ -51,9 +51,6 @@ interface MapProps
   }[];
 
   markerSelected: (id: string) => void;
-
-  onMouseEnter?: (event: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
-  onMouseLeave?: (event: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
 }
 
 //Make the zoomable group animated
@@ -91,10 +88,10 @@ const Map: React.FC<MapProps> = (props: MapProps) =>
   };
 
   //Animation state
-  const [newCenter, setNewCenter] = useState(props.center);
-  const [newZoom, setNewZoom] = useState(props.zoom);
-  const [oldCenter, setOldCenter] = useState(props.center);
-  const [oldZoom, setOldZoom] = useState(props.zoom);
+  const [newCoordinates, setNewCoordinates] = useState(props.transform.coordinates);
+  const [newZoom, setNewZoom] = useState(props.transform.zoom);
+  const [oldCoordinates, setOldCoordinates] = useState(props.transform.coordinates);
+  const [oldZoom, setOldZoom] = useState(props.transform.zoom);
   const [paused, setPaused] = useState(false);
 
   //Update state on prop update
@@ -103,38 +100,41 @@ const Map: React.FC<MapProps> = (props: MapProps) =>
     //Update old transformation with current transformation if unpaused (If paused, the updateAnimation handler takes care of this)
     if (!paused)
     {
-      setOldCenter(center as any);
+      setOldCoordinates(coordinates as any);
       setOldZoom(zoom as any);
     }
 
     //Update new transformation with prop transformation
-    setNewCenter(props.center);
-    setNewZoom(props.zoom);
+    setNewCoordinates(props.transform.coordinates);
+    setNewZoom(props.transform.zoom);
 
     //Unpause animations
     setPaused(false);
-  }, [props.center, props.zoom]);
+  }, [props.transform]);
 
   //Update the state when the user manually moves the map
-  const updateAnimation = (event: MoveEvent) =>
+  const updateAnimation = (userTransform: Transform) =>
   {
     //Pause animations
     setPaused(true);
 
     //Update old transformation with user transformation
-    setOldCenter(event.coordinates);
-    setOldZoom(event.zoom);
+    setOldCoordinates(userTransform.coordinates);
+    setOldZoom(userTransform.zoom);
+
+    //Call the parent transform handler
+    props.onTransform(userTransform);
   };
 
   //Animate state
-  const {center, zoom} = useSpring({
+  const {coordinates, zoom} = useSpring({
     config: config.default,
     from: {
-      center: oldCenter,
+      coordinates: oldCoordinates,
       zoom: oldZoom
     },
     to: {
-      center: newCenter,
+      coordinates: newCoordinates,
       zoom: newZoom
     },
     pause: paused,
@@ -142,8 +142,8 @@ const Map: React.FC<MapProps> = (props: MapProps) =>
     //Update the state when the animation finishes
     onRest: () =>
     {
-      //Update old state with the end state of the animation (So the spring knows where to animate from)
-      setOldCenter(center.goal);
+      //Update old transformation with the end of the animation (So the spring knows where to animate from)
+      setOldCoordinates(coordinates.goal);
       setOldZoom(zoom.goal);
     }
   });
@@ -157,14 +157,12 @@ const Map: React.FC<MapProps> = (props: MapProps) =>
 
   return (
     <ComposableMap projection={projection} projectionConfig={projectionConfig} height={350}>
-      <AnimatedZoomableGroup center={center as any} onMoveEnd={updateAnimation} translateExtent={translateExtend} zoom={zoom}>
+      <AnimatedZoomableGroup center={coordinates as any} onMoveEnd={updateAnimation} translateExtent={translateExtend} zoom={zoom}>
         <Geographies geography={topoJSON}>
           {({geographies}) => geographies.map(geo =>
             <Geography
               key={geo.rsmKey}
               geography={geo}
-              onMouseEnter={props.onMouseEnter}
-              onMouseLeave={props.onMouseLeave}
               style={geoStyle}
             />
           )}
@@ -181,10 +179,6 @@ const Map: React.FC<MapProps> = (props: MapProps) =>
       </AnimatedZoomableGroup>
     </ComposableMap>
   );
-};
-
-Map.defaultProps = {
-  zoom: 3
 };
 
 export default Map;
