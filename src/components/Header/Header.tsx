@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => (
     </Link>
 
     <Stack direction="row" left="50%" position="absolute" transform="translateX(-50%)">
-      <Link to="/">
+      <Link to="/challenges">
         <Button colorScheme="primary" leftIcon={<Flag />}>Challenges</Button>
       </Link>
       <Link to="/scoreboard">
