@@ -16,6 +16,13 @@ docker run -d -p 80:80 --name www-codecup codeday/www-codecup:latest
 
 ## Development
 
+### Git hooks
+1. Copy all files from `.githooks` to `.git/hooks`:
+
+Bash | Powershell
+--- | ---
+`cp $(find .githooks -type f | grep -v -E "\.\w+$") .git/hooks` | `Copy-Item -Filter *. .githooks/* .git/hooks`
+
 ### Create a new component
 1. Create the React component:
 ```bash

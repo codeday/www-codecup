@@ -38,6 +38,7 @@
     "src"
   ],
   "exclude": [
+    ".githooks",
     "build",
     "node_modules"
   ]

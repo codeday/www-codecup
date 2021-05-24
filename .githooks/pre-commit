@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Execute the corresponding Node script
+node .githooks/pre-commit.mjs
