@@ -1,7 +1,9 @@
 import './index.css';
-import {ChakraProvider, extendTheme} from '@chakra-ui/react';
 import App from './App';
 import ReactDOM from 'react-dom';
+import client from './apollo';
+import {ApolloProvider} from '@apollo/client/react';
+import {ChakraProvider, extendTheme} from '@chakra-ui/react';
 
 //Chakra theme
 const font = 'Source Code Pro';
@@ -42,8 +44,10 @@ const theme = extendTheme({
 });
 
 ReactDOM.render(
-  <ChakraProvider theme={theme}>
-    <App />
-  </ChakraProvider>,
+  <ApolloProvider client={client}>
+    <ChakraProvider theme={theme}>
+      <App />
+    </ChakraProvider>
+  </ApolloProvider>,
   document.getElementById('root')
 );
