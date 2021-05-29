@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Index page
+ */
+
 import React from 'react';
 import {Box, Flex, Heading, Text} from '@chakra-ui/react';
 import {gql, useQuery} from '@apollo/client';
@@ -27,7 +31,7 @@ interface CmsInfo
   }
 }
 
-const About: React.FC = () =>
+const Index: React.FC = () =>
 {
   //Get CMS info
   const {data} = useQuery<CmsInfo>(GET_CMS_INFO);
@@ -39,7 +43,7 @@ const About: React.FC = () =>
 
     return (
       <Flex align="center" data-testid="About">
-        <Box background="gray.800" padding="10px" rounded="xl" textAlign="center" width="70vw">
+        <Box padding="10px" textAlign="center" width="70vw">
           <Heading fontSize="4xl">{info.name}</Heading>
           <Text>{info.description}</Text>
         </Box>
@@ -52,4 +56,4 @@ const About: React.FC = () =>
   }
 };
 
-export default About;
+export default Index;

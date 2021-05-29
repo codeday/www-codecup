@@ -1,6 +1,6 @@
 import {Box, Button, Flex, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Stack, Text} from '@chakra-ui/react';
 import {BarChart2, Flag, Info} from 'react-feather';
-import {Link} from 'react-router-dom';
+import Link from 'next/link';
 import Glitch from '../Glitch/Glitch';
 import logo from '../../logo.svg';
 import React from 'react';
@@ -13,7 +13,7 @@ interface HeaderProps
 
 const Header: React.FC<HeaderProps> = (props: HeaderProps) => (
   <Flex align="center" as="header" justifyContent="space-between" padding="5px" width="100%" wrap="wrap">
-    <Link to="/">
+    <Link href="/">
       <Stack align="center" direction="row">
         <Box marginRight="20px">
           <img alt="Code Cup Logo" src={logo} width="48" />
@@ -24,10 +24,10 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => (
     </Link>
 
     <Stack direction="row" left="50%" position="absolute" transform="translateX(-50%)">
-      <Link to="/challenges">
+      <Link href="/challenges">
         <Button colorScheme="primary" leftIcon={<Flag />}>Challenges</Button>
       </Link>
-      <Link to="/scoreboard">
+      <Link href="/scoreboard">
         <Button colorScheme="secondary" leftIcon={<BarChart2 />}>Scoreboard</Button>
       </Link>
     </Stack>

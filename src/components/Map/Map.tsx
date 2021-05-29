@@ -75,14 +75,17 @@ const Map: React.FC<MapProps> = (props: MapProps) =>
   const geoStyle = {
     default: {
       fill: geoFill,
+      opacity: 0.7,
       outline: 'none'
     },
     hover: {
       fill: geoFill,
+      opacity: 0.9,
       outline: 'none'
     },
     pressed: {
       fill: geoFill,
+      opacity: 0.9,
       outline: 'none'
     }
   };

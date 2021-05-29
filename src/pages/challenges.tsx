@@ -1,7 +1,7 @@
-import Challenge from '../../components/Challenge/Challenge';
-import Map, {Transform} from '../../components/Map/Map';
+import Challenge from '../components/Challenge/Challenge';
+import Map, {Transform} from '../components/Map/Map';
 import React, {useState} from 'react';
-import Search from '../../components/Search/Search';
+import Search from '../components/Search/Search';
 import {Box, Flex, Heading, useDisclosure} from '@chakra-ui/react';
 import {Point} from 'react-simple-maps';
 
@@ -77,7 +77,7 @@ const Challenges: React.FC<ChallengesProps> = (props: ChallengesProps) =>
 
   return (
     <Flex align="center" data-testid="NotFound">
-      <Box background="gray.800" padding="10px" rounded="xl" textAlign="center" width="70vw" >
+      <Box padding="10px" textAlign="center" width="80vw" >
         <Heading fontSize="4xl">Challenges</Heading>
 
         <Search items={props.challenges} itemSelected={challengeSelected} />

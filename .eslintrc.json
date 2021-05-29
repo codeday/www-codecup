@@ -12,6 +12,9 @@
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
+  "ignorePatterns": [
+    "next.config.js"
+  ],
   "rules": {
     "arrow-parens": [
       "warn",

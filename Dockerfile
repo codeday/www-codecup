@@ -1,8 +1,11 @@
-# Build container
-FROM node:current-alpine as build
+# Use NodeJS Alpine
+FROM node:current-alpine
+
+# Create a system user
+RUN addgroup -S nodejs && adduser -S nextjs -G nodejs
 
 # Working directory
-WORKDIR /src
+WORKDIR /app
 
 # Copy source code
 COPY . .
@@ -14,26 +17,14 @@ RUN npm install
 # Build frontend
 RUN npm run build
 
-# Server container
-FROM caddy:alpine
+# Switch to the nextjs user
+USER nextjs
 
-# Create a system user
-RUN addgroup -S node && adduser -S node -G node
+# Expose NextJS (HTTP)
+EXPOSE 3000
 
-# Working directory
-WORKDIR /var/www
+# Disable NextJS telemetry
+ENV NEXT_TELEMETRY_DISABLED=1
 
-# Copy the frontend
-COPY --chown=node:node --from=build /src/build .
-
-# Copy the Caddy config
-COPY Caddyfile /etc/caddy
-
-# Configure Caddy
-ENV STATIC=/var/www
-
-# Expose HTTP
-EXPOSE 80
-
-# Start caddy
-CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+# Start NextJS via NPM
+CMD ["npm", "run", "start"]

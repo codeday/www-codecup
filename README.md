@@ -10,9 +10,9 @@ docker build -t codeday/www-codecup:latest .
 ```
 2. Run the image:
 ```bash
-docker run -d -p 80:80 --name www-codecup codeday/www-codecup:latest
+docker run -d -p 3000:3000 --name www-codecup codeday/www-codecup:latest
 ```
-3. Access the site at `http://[CONTAINER IP]` (Port 80/HTTP)
+3. Access the site at `http://[CONTAINER IP]` (Port 3000/HTTP)
 
 ## Development
 
