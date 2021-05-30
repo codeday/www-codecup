@@ -1,3 +1,5 @@
+/// <reference types="next-images"/>
+
 import {Box, Button, Flex, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Stack, Text} from '@chakra-ui/react';
 import {BarChart2, Flag, Info} from 'react-feather';
 import Link from 'next/link';

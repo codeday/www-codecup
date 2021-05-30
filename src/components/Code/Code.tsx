@@ -11,13 +11,6 @@ interface CodeProps
   language?: string;
 }
 
-/**
- * Language prefix
- * 
- * See Parse language (See https://github.com/remarkjs/react-markdown/blob/main/readme.md#use-custom-components-syntax-highlight)
- */
-
-
 const Code: React.FC<CodeProps> = (props: CodeProps) =>
 {
   //Inline code blocks

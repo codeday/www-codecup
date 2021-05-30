@@ -2,58 +2,56 @@
  * @fileoverview Index page
  */
 
+/// <reference path="../types.d.ts"/>
+
+//Imports
+import * as queries from './index.gql';
 import React from 'react';
-import {Box, Flex, Heading, Text} from '@chakra-ui/react';
-import {gql, useQuery} from '@apollo/client';
+import client from '../apollo';
+import {Box, Button, Flex, Heading, Text} from '@chakra-ui/react';
+import {GetStaticProps} from 'next';
+import {signIn, useSession} from 'next-auth/client';
 
-const GET_CMS_INFO = gql`query {
-  cms {
-    programs(limit: 1, where: { webname: "codecup" } ) {
-      items {
-        name
-        description
-      }
-    }
-  }
-}`;
-
-interface CmsInfo
+interface IndexProps
 {
-  cms: {
-    programs: {
-      items: [
-        {
-          name: string;
-          description: string;
-        }
-      ]
-    }
-  }
+  name: string;
+  description: string;
 }
 
-const Index: React.FC = () =>
+const Index: React.FC<IndexProps> = (props: IndexProps) =>
+{
+  //Session
+  const [session] = useSession();
+
+  return (
+    <Flex align="center" data-testid="About">
+      <Box padding="10px" textAlign="center" width="50vw">
+        <Heading fontSize="4xl">{props.name}</Heading>
+        <Text marginTop="10px">{props.description}</Text>
+
+        {session == null ? (
+          <Button colorScheme='primary' onClick={() => signIn('auth0')} marginTop="10px">Login</Button>
+        ) : (
+          <Text marginTop="10px">Hello {session.user.name}!</Text>
+        )}
+      </Box>
+    </Flex>
+  );
+};
+
+export const getStaticProps: GetStaticProps<IndexProps> = async ctx =>
 {
   //Get CMS info
-  const {data} = useQuery<CmsInfo>(GET_CMS_INFO);
+  const {data} = await client.query({
+    query: queries.CmsInfo
+  });
 
-  if (data != null)
-  {
-    //Get the info
-    const info = data.cms.programs.items[0];
+  //Extract info
+  const info = data.cms.programs.items[0];
 
-    return (
-      <Flex align="center" data-testid="About">
-        <Box padding="10px" textAlign="center" width="70vw">
-          <Heading fontSize="4xl">{info.name}</Heading>
-          <Text>{info.description}</Text>
-        </Box>
-      </Flex>
-    );
-  }
-  else
-  {
-    return null;
-  }
+  return {
+    props: info
+  };
 };
 
 export default Index;

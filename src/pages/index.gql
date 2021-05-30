@@ -1,0 +1,10 @@
+query CmsInfo {
+  cms {
+    programs(limit: 1, where: {webname: "codecup"}) {
+      items {
+        name
+        description
+      }
+    }
+  }
+}

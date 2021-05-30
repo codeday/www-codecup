@@ -1,4 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+/// <reference path="../../types.d.ts"/>
+
+//Imports
 import React, {useEffect, useState} from 'react';
 import {ComposableMap, Geographies, Geography, Marker, Point, ProjectionConfig, ZoomableGroup} from 'react-simple-maps';
 import {animated, config, useSpring} from 'react-spring';

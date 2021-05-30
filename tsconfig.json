@@ -36,8 +36,7 @@
   },
   "include": [
     "src/**.ts",
-    "src/**.tsx",
-    "src/**.svg"
+    "src/**.tsx"
   ],
   "exclude": [
     ".githooks",
