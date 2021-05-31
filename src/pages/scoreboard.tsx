@@ -101,7 +101,6 @@ const Scoreboard: React.FC<ScoreboardProps> = (props: ScoreboardProps) =>
 
       pointStyle: 'crossRot',
       pointRadius: 7,
-      tension: 0.3,
 
       data: team.scores.map(score =>
       {
