@@ -1,6 +1,17 @@
 # www-codecup
 New CodeCup website design, built off graphctf
 
+## Config
+All configuration is done through environment variables or [`.env.local`](https://nextjs.org/docs/basic-features/environment-variables#loading-environment-variables) files (Using the same variable names).
+
+Name | Description
+--- | ---
+`AUTH0_CLIENT_ID` | Auth0 OAuth Client ID
+`AUTH0_CLIENT_SECRET` | Auth0 OAuth Client Secret
+`AUTH0_DOMAIN` | Auth0 Organization Endpoint
+`NEXTAUTH_SECRET` | [NextAuth global secret](https://next-auth.js.org/configuration/options#secret)
+`NEXTAUTH_URL` | [NextAuth site URL](https://next-auth.js.org/configuration/options#nextauth_url)
+
 ## Production
 
 ### Building
@@ -10,9 +21,9 @@ docker build -t codeday/www-codecup:latest .
 ```
 2. Run the image:
 ```bash
-docker run -d -p 80:80 --name www-codecup codeday/www-codecup:latest
+docker run -d -p 3000:3000 --name www-codecup codeday/www-codecup:latest
 ```
-3. Access the site at `http://[CONTAINER IP]` (Port 80/HTTP)
+3. Access the site at `http://[CONTAINER IP]` (Port 3000/HTTP)
 
 ## Development
 

@@ -1,9 +1,14 @@
 import 'chartjs-adapter-luxon';
-import React from 'react';
-import styles from './Scoreboard.module.css';
+import React, {CSSProperties} from 'react';
 import {Box, Flex, Heading, Table, Tbody, Td, Th, Thead, Tr, useToken} from '@chakra-ui/react';
 import {ChartOptions, ChartData} from 'chart.js/types/index.esm';
 import {Line} from 'react-chartjs-2';
+
+const rowStyle = 
+{
+  borderColor: 'var(--chakra-colors-gray-500) !important',
+  padding: '10px !important'
+} as CSSProperties;
 
 //Get a random color from the Chakra theme
 const randomColor = (): string =>
@@ -111,24 +116,26 @@ const Scoreboard: React.FC<ScoreboardProps> = (props: ScoreboardProps) =>
   } as ChartData;
 
   return (
-    <Flex align="center" data- testid="NotFound" >
-      <Box background="gray.800" padding="10px" rounded="xl" textAlign="center">
+    <Flex align="center" data-testid="NotFound" >
+      <Box padding="10px" textAlign="center">
         <Heading fontSize="4xl">Scoreboard</Heading>
 
-        <div className={styles.graph}>
+        <div style={{
+          width: '60vw'
+        }}>
           <Line data={graphData} options={graphOptions} type="line" />
         </div>
 
         <Table variant="simple">
           <Thead>
-            <Tr className={styles.row}>
+            <Tr style={rowStyle}>
               <Th>Name</Th>
               <Th textAlign="end">Score</Th>
             </Tr>
           </Thead>
           <Tbody width="100%">
             {teams.map(team =>
-              <Tr className={styles.row} key={team.name}>
+              <Tr key={team.name} style={rowStyle}>
                 <Td>{team.name}</Td>
                 <Td isNumeric>{team.scores[team.scores.length - 1].value}</Td>
               </Tr>

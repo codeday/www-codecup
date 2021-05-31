@@ -1,4 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+/// <reference path="../../types.d.ts"/>
+
+//Imports
 import React, {useEffect, useState} from 'react';
 import {ComposableMap, Geographies, Geography, Marker, Point, ProjectionConfig, ZoomableGroup} from 'react-simple-maps';
 import {animated, config, useSpring} from 'react-spring';
@@ -75,14 +79,17 @@ const Map: React.FC<MapProps> = (props: MapProps) =>
   const geoStyle = {
     default: {
       fill: geoFill,
+      opacity: 0.7,
       outline: 'none'
     },
     hover: {
       fill: geoFill,
+      opacity: 0.9,
       outline: 'none'
     },
     pressed: {
       fill: geoFill,
+      opacity: 0.9,
       outline: 'none'
     }
   };

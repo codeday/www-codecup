@@ -12,6 +12,9 @@
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
+  "ignorePatterns": [
+    "next.config.js"
+  ],
   "rules": {
     "arrow-parens": [
       "warn",
@@ -30,6 +33,7 @@
     "prefer-const": "warn",
     "semi": "error",
     "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/triple-slash-reference": "off"
   }
 }

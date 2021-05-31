@@ -9,12 +9,12 @@
     ],
     "allowJs": true,
     "module": "ESNext",
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "declaration": true,
     "sourceMap": true,
     "noEmit": true,
     "isolatedModules": true,
-    
+
     /* Strict Type-Checking Options */
     "strict": true,
     "noImplicitAny": true,
@@ -35,7 +35,8 @@
     "resolveJsonModule": true
   },
   "include": [
-    "src"
+    "src/**.ts",
+    "src/**.tsx"
   ],
   "exclude": [
     ".githooks",
