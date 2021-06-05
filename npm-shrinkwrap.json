@@ -11,6 +11,7 @@
         "@chakra-ui/react": "^1.5.2",
         "@emotion/react": "^11.1.5",
         "@emotion/styled": "^11.3.0",
+        "@types/color-hash": "^1.0.0",
         "@types/jest": "^26.0.22",
         "@types/node": "^14.14.41",
         "@types/react": "^17.0.3",
@@ -21,6 +22,7 @@
         "chalk": "^3.0.0",
         "chart.js": "^3.2.1",
         "chartjs-adapter-luxon": "^1.0.0",
+        "color-hash": "^2.0.1",
         "d3-geo-projection": "^3.0.0",
         "framer-motion": "^4.1.11",
         "fuse.js": "^6.4.6",
@@ -1954,6 +1956,11 @@
       "integrity": "sha512-S6oPal772qJZHoRZLFc/XoZW2gFvwXusYUmXPXkgxJLuEk2vOt7jc4Yo6z/vtI0EBkbPBVrJJ0B+prLIKiWqHg==",
       "dev": true
     },
+    "node_modules/@types/color-hash": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/@types/color-hash/-/color-hash-1.0.0.tgz",
+      "integrity": "sha512-Vj9gPc43pJeILnI0Yh0ds4+1toNUmvVqKxg/5sY8ESZafKo24TY5eCKXwXPym1xcgEMb2Qxy3dRwaYOro4U5Tg=="
+    },
     "node_modules/@types/d3-geo": {
       "version": "2.0.0",
       "resolved": "https://registry.npmjs.org/@types/d3-geo/-/d3-geo-2.0.0.tgz",
@@ -3214,6 +3221,11 @@
       "engines": {
         "node": ">=7.0.0"
       }
+    },
+    "node_modules/color-hash": {
+      "version": "2.0.1",
+      "resolved": "https://registry.npmjs.org/color-hash/-/color-hash-2.0.1.tgz",
+      "integrity": "sha512-/wIYAQ3xL9ruURLmDbxAsXEsivaOfwWDUVy+zbWJZL3bnNQIDNSmmqbkNzeTOQvDdiz11Kb010UlJN7hUXLg/w=="
     },
     "node_modules/color-name": {
       "version": "1.1.4",
@@ -10685,6 +10697,11 @@
       "integrity": "sha512-S6oPal772qJZHoRZLFc/XoZW2gFvwXusYUmXPXkgxJLuEk2vOt7jc4Yo6z/vtI0EBkbPBVrJJ0B+prLIKiWqHg==",
       "dev": true
     },
+    "@types/color-hash": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/@types/color-hash/-/color-hash-1.0.0.tgz",
+      "integrity": "sha512-Vj9gPc43pJeILnI0Yh0ds4+1toNUmvVqKxg/5sY8ESZafKo24TY5eCKXwXPym1xcgEMb2Qxy3dRwaYOro4U5Tg=="
+    },
     "@types/d3-geo": {
       "version": "2.0.0",
       "resolved": "https://registry.npmjs.org/@types/d3-geo/-/d3-geo-2.0.0.tgz",
@@ -11682,6 +11699,11 @@
       "requires": {
         "color-name": "~1.1.4"
       }
+    },
+    "color-hash": {
+      "version": "2.0.1",
+      "resolved": "https://registry.npmjs.org/color-hash/-/color-hash-2.0.1.tgz",
+      "integrity": "sha512-/wIYAQ3xL9ruURLmDbxAsXEsivaOfwWDUVy+zbWJZL3bnNQIDNSmmqbkNzeTOQvDdiz11Kb010UlJN7hUXLg/w=="
     },
     "color-name": {
       "version": "1.1.4",
