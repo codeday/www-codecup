@@ -15,7 +15,10 @@ const rowStyle =
 } as CSSProperties;
 
 //Instantiate a color hasher
-const hasher = new ColorHash();
+const hasher = new ColorHash({
+  lightness: [0.4, 0.5, 0.65],
+  saturation: 1
+});
 
 interface ScoreboardProps
 {

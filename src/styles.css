@@ -10,3 +10,8 @@
   height: 100%;
   width: 100%;
 }
+
+/* Resizable drawer */
+.react-resizable {
+  overflow: auto;
+}
