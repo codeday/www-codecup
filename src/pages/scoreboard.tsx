@@ -1,4 +1,4 @@
-import ScoreboardComponent from '../components/Scoreboard/Scoreboard';
+import ScoreboardComponent from '@/components/Scoreboard/Scoreboard';
 import {Flex} from '@chakra-ui/react';
 
 interface ScoreboardProps

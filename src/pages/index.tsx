@@ -7,7 +7,7 @@
 //Imports
 import * as queries from './index.gql';
 import React from 'react';
-import client from '../apollo';
+import client from '@/apollo';
 import {Box, Button, Flex, Heading, Text} from '@chakra-ui/react';
 import {GetStaticProps} from 'next';
 import {signIn, useSession} from 'next-auth/client';

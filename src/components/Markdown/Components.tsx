@@ -8,7 +8,7 @@
  */
 
 //Imports
-import Code from '../Code/Code';
+import Code from '@/components/Code/Code';
 import {Components, ReactBaseProps, ReactMarkdownProps} from 'react-markdown/src/ast-to-react';
 import {As, Checkbox, Code as ChakraCode, Divider, Heading, Image, Link, ListItem, OrderedList, Table, Tbody, Td, Text, Th, Thead, Tr, UnorderedList} from '@chakra-ui/react';
 

@@ -1,6 +1,6 @@
 //Imports
-import Handle from '../Handle/Handle';
-import Markdown from '../Markdown/Markdown';
+import Handle from '@/components/Handle/Handle';
+import Markdown from '@/components/Markdown/Markdown';
 import React, {SyntheticEvent, useState} from 'react';
 import {Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Input} from '@chakra-ui/react';
 import {Resizable, ResizeCallbackData} from 'react-resizable';

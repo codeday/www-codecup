@@ -3,10 +3,10 @@
  */
 
 //Imports
-import '../styles.css';
-import Footer from '../components/Footer/Footer';
+import '@/styles.css';
+import Footer from '@/components/Footer/Footer';
 import Head from 'next/head';
-import Header from '../components/Header/Header';
+import Header from '@/components/Header/Header';
 import Particles, {IParticlesParams} from 'react-particles-js';
 import {AppProps} from 'next/app';
 import {ChakraProvider, extendTheme, Flex, useToken} from '@chakra-ui/react';

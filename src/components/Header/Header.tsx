@@ -3,8 +3,8 @@
 import {Box, Button, Flex, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Stack, Text} from '@chakra-ui/react';
 import {BarChart2, Flag, Info} from 'react-feather';
 import Link from 'next/link';
-import Glitch from '../Glitch/Glitch';
-import logo from '../../logo.svg';
+import Glitch from '@/components/Glitch/Glitch';
+import logo from '@/logo.svg';
 import React from 'react';
 
 interface HeaderProps

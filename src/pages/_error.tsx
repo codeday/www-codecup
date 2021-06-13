@@ -1,4 +1,4 @@
-import Error from '../components/Error/Error';
+import Error from '@/components/Error/Error';
 import React from 'react';
 import {ErrorProps} from 'next/error';
 

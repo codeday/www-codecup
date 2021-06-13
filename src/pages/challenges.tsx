@@ -1,7 +1,7 @@
-import Challenge from '../components/Challenge/Challenge';
-import Map, {Transform} from '../components/Map/Map';
+import Challenge from '@/components/Challenge/Challenge';
+import Map, {Transform} from '@/components/Map/Map';
 import React, {useState} from 'react';
-import Search from '../components/Search/Search';
+import Search from '@/components/Search/Search';
 import {Box, Flex, Heading, useDisclosure} from '@chakra-ui/react';
 import {Point} from 'react-simple-maps';
 

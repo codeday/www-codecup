@@ -32,11 +32,17 @@
 
     /* Module Resolution Options */
     "moduleResolution": "node",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+
+    /* Path aliases */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": [
-    "src/**.ts",
-    "src/**.tsx"
+    "src/**/*.ts",
+    "src/**/*.tsx"
   ],
   "exclude": [
     ".githooks",

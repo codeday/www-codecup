@@ -35,14 +35,27 @@ module.exports = withPlugins([
   ]),
   {
     serverRuntimeConfig: {
+      /**
+       * Auth0 client configuration
+       */
       auth0: {
         clientId: process.env.AUTH0_CLIENT_ID,
         clientSecret: process.env.AUTH0_CLIENT_SECRET,
         domain: process.env.AUTH0_DOMAIN,
         authorizationUrl: `https://${process.env.AUTH0_DOMAIN}/authorize?response_type=code&prompt=login`
       },
-      next: {
+      /**
+       * NextAuth configuration
+       */
+      nextAuth: {
         secret: process.env.NEXTAUTH_SECRET
+      },
+      /**
+       * GraphCTF configuration
+       */
+      graphCtf: {
+        audience: process.env.GRAPHCTF_AUDIENCE,
+        secret: process.env.GRAPHCTF_SECRET
       }
     }
   }
