@@ -32,14 +32,14 @@ const Index: React.FC<IndexProps> = (props: IndexProps) =>
         {session == null ? (
           <Button colorScheme='primary' onClick={() => signIn('auth0')} marginTop="10px">Login</Button>
         ) : (
-          <Text marginTop="10px">Hello {session.user.name}!</Text>
+          <Text marginTop="10px">Hello {session.user!.name}!</Text>
         )}
       </Box>
     </Flex>
   );
 };
 
-export const getStaticProps: GetStaticProps<IndexProps> = async ctx =>
+export const getStaticProps: GetStaticProps<IndexProps> = async () =>
 {
   //Get CMS info
   const {data} = await client.query({

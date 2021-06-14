@@ -9,7 +9,9 @@ declare module 'd3-geo-projection'
   export function geoCylindricalStereographic(): ProjectionFunction;
 }
 
-declare module "*.gql" {
+declare module '*.css';
+
+declare module '*.gql' {
   import {DocumentNode} from "graphql";
 
   const content: {
