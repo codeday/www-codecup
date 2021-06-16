@@ -14,7 +14,7 @@ import {mintToken} from '@/lib/graphctf/token';
 
 //The endpoint request schema
 const schema = Joi.object({
-  game: Joi.string().regex(/^c[a-z0-9]{24}$/),
+  game: Joi.string().regex(/^c[a-z0-9]{19,29}$/),
   team: Joi.string().regex(/^[A-z0-9-]+$/),
   role: Joi.string().valid(...Object.values(UserRole)),
 });
