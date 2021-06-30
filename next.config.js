@@ -11,10 +11,10 @@ const {randomBytes} = require('crypto');
 
 //Ensure NextJS secret is provided and long enough
 const entropy = 512;
-if (process.env.NEXTAUTH_SECRET == null || process.env.NEXTAUTH_SECRET.length < entropy)
+if (process.env.NEXTAUTH_SECRET == null || Buffer.byteLength(process.env.NEXTAUTH_SECRET, 'utf-8') < entropy)
 {
   //Log
-  console.warn(chalk.red(`[WARNING] Environment variable "NEXTAUTH_SECRET" is missing or too short! (Needs to be at least ${entropy} characters long!)`));
+  console.warn(chalk.red(`[WARNING] Environment variable "NEXTAUTH_SECRET" is missing or too short! (Needs to be at least ${entropy} bytes!)`));
   console.warn(chalk.red('[WARNING] Generating random secret "NEXTAUTH_SECRET" (Load-balanced sessions won\'t work!)'));
 
   //Generate crypto-safe secret
@@ -55,7 +55,16 @@ module.exports = withPlugins([
        */
       graphCtf: {
         audience: process.env.GRAPHCTF_AUDIENCE,
-        secret: process.env.GRAPHCTF_SECRET
+        secret: process.env.GRAPHCTF_SECRET,
+        url: process.env.GRAPHCTF_URL
+      }
+    },
+    publicRuntimeConfig: {
+      /**
+       * GraphCTF configuration
+       */
+      graphCtf: {
+        url: process.env.GRAPHCTF_URL
       }
     }
   }

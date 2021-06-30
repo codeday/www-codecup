@@ -11,6 +11,9 @@ Name | Description
 `AUTH0_DOMAIN` | Auth0 Organization Endpoint
 `NEXTAUTH_SECRET` | [NextAuth global secret](https://next-auth.js.org/configuration/options#secret)
 `NEXTAUTH_URL` | [NextAuth site URL](https://next-auth.js.org/configuration/options#nextauth_url)
+`GRAPHCTF_AUDIENCE` | GraphCTF exchange token audience
+`GRAPHCTF_SECRET` | GraphCTF exchange token secret
+`GRAPHCTF_URL` | Fully-qualified URL of the GraphCTF server
 
 ## Production
 
@@ -51,13 +54,6 @@ npx generate-react-cli component {Name} --type=page
 1. Start React with:
 ```bash
 npm start
-```
-
-### Serve with Caddy
-1. Set the `STATIC` environment variable to the `build` directory
-2. Run Caddy with:
-```bash
-caddy run --config Caddyfile --adapter caddyfile
 ```
 
 ## Theming

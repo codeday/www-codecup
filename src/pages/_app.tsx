@@ -8,9 +8,11 @@ import Footer from '@/components/Footer/Footer';
 import Head from 'next/head';
 import Header from '@/components/Header/Header';
 import Particles, {IParticlesParams} from 'react-particles-js';
+import {ApolloProvider} from '@apollo/client';
 import {AppProps} from 'next/app';
 import {ChakraProvider, extendTheme, Flex, useToken} from '@chakra-ui/react';
 import {FC} from 'react';
+import {graphCtfClient} from '@/lib/graphql/apollo';
 
 //Chakra theme
 const font = 'Source Code Pro';
@@ -91,35 +93,37 @@ const App: FC<AppProps> = (props: AppProps) =>
   };
 
   return (
-    <ChakraProvider theme={theme}>
-      <Flex align="center" flexDirection="column" height="100%" position="relative">
-        <Head>
-          <link rel="shortcut icon" href="/favicon.ico" />
+    <ApolloProvider client={graphCtfClient} >
+      <ChakraProvider theme={theme}>
+        <Flex align="center" flexDirection="column" height="100%" position="relative">
+          <Head>
+            <link rel="shortcut icon" href="/favicon.ico" />
 
-          < link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;700&display=swap" rel="stylesheet" />
+            < link rel="preconnect" href="https://fonts.gstatic.com" />
+            <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;700&display=swap" rel="stylesheet" />
 
-          <title>CodeCup</title>
-        </Head >
+            <title>CodeCup</title>
+          </Head >
 
-        <Header yourName="John Doe" teamName="Polaris" />
+          <Header yourName="John Doe" teamName="Polaris" />
 
-        <Flex as="main" flex="1">
-          <props.Component {...props.pageProps} />
+          <Flex as="main" flex="1">
+            <props.Component {...props.pageProps} />
+          </Flex>
+
+          <Particles params={particles} style={{
+            height: '100%',
+            left: 0,
+            position: 'fixed',
+            top: 0,
+            width: '100%',
+            zIndex: -4
+          }} />
+          <Footer />
+
         </Flex>
-
-        <Particles params={particles} style={{
-          height: '100%',
-          left: 0,
-          position: 'fixed',
-          top: 0,
-          width: '100%',
-          zIndex: -4
-        }} />
-        <Footer />
-
-      </Flex>
-    </ChakraProvider>
+      </ChakraProvider>
+    </ApolloProvider>
   );
 };
 
