@@ -47,7 +47,7 @@
     "react-resizable": "^3.0.1",
     "react-simple-maps": "^2.3.0",
     "react-spring": "^9.1.2",
-    "react-syntax-highlighter": "^5.8.0",
+    "react-syntax-highlighter": "^15.4.3",
     "react-use-sizes": "^1.0.8",
     "remark-gfm": "^1.0.0",
     "tsparticles": "^1.30.1",
