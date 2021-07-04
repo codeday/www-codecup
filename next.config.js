@@ -10,7 +10,7 @@ const withTranspileModules = require('next-transpile-modules');
 const {randomBytes} = require('crypto');
 
 //Ensure NextJS secret is provided and long enough
-const entropy = 512;
+const entropy = 64;
 if (process.env.NEXTAUTH_SECRET == null || Buffer.byteLength(process.env.NEXTAUTH_SECRET, 'utf-8') < entropy)
 {
   //Log

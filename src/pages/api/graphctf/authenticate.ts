@@ -9,8 +9,19 @@ import authenticate from '@/lib/graphctf/authenticate';
 import type {NextApiRequest, NextApiResponse} from 'next';
 import {getSession} from 'next-auth/client';
 
-export default async (req: NextApiRequest, res: NextApiResponse) =>
+export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> =>
 {
+  //Deny if wrong method
+  if (req.method != 'POST')
+  {
+    return res.status(405).json({
+      error: {
+        name: 'Invalid method',
+        description: 'This endpoint only accepts POST requests!'
+      }
+    });
+  }
+
   //Get the session
   const session = await getSession({req});
 
@@ -38,11 +49,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) =>
   }
 
   //Authenticate to GraphCTF
-  const sessionToken = authenticate(
+  const sessionToken = await authenticate(
     code,
     session.user!.name!
   );
 
-  //Save the token
-  session.graphCtfToken = sessionToken;
+  //Send the GraphCTF session token
+  return res.status(200).json({
+    token: sessionToken
+  });
 };

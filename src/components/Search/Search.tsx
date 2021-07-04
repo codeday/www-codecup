@@ -101,7 +101,7 @@ const Search: React.FC<SearchProps> = (props: SearchProps) =>
 
           {query.length > 0 &&
             <InputRightAddon padding={0}>
-              <Button onClick={clearQuery} roundedStart={0}>
+              <Button colorScheme="primary" onClick={clearQuery} roundedStart={0}>
                 <CloseIcon />
               </Button>
             </InputRightAddon>
