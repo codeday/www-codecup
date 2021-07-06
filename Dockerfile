@@ -12,7 +12,7 @@ COPY . .
 
 # Install dependencies
 ENV NODE_ENV=production
-RUN npm install
+RUN npm install --ignore-scripts
 
 # Build frontend
 RUN npm run build
