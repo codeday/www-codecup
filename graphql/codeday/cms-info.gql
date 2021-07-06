@@ -1,3 +1,4 @@
+# Query info about CodeCup from the CodeDay CMS
 query CmsInfo {
   cms {
     programs(limit: 1, where: {webname: "codecup"}) {

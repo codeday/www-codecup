@@ -13,6 +13,7 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "ignorePatterns": [
+    "hooks/*",
     "next.config.js"
   ],
   "rules": {

@@ -1,3 +1,4 @@
+# Exchange the user information for a GraphCTF session token
 mutation Exchange($token: String!) {
   exchange(token: $token)
 }

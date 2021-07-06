@@ -2,7 +2,7 @@
 New CodeCup website design, built off graphctf
 
 ## Config
-All configuration is done through environment variables or [`.env.local`](https://nextjs.org/docs/basic-features/environment-variables#loading-environment-variables) files (Using the same variable names).
+All configuration is done through environment variables or a [`.env.local`](https://nextjs.org/docs/basic-features/environment-variables#loading-environment-variables) file (Using the same variable names).
 
 Name | Description
 --- | ---
@@ -30,13 +30,6 @@ docker run -d -p 3000:3000 --name www-codecup codeday/www-codecup:latest
 
 ## Development
 
-### Git hooks
-1. Copy all files from `.githooks` to `.git/hooks`:
-
-Bash | Powershell
---- | ---
-`cp $(find .githooks -type f \| grep -v -E "\.\w+$") .git/hooks` | `Copy-Item -Filter *. .githooks/* .git/hooks`
-
 ### Create a new component
 1. Create the React component:
 ```bash
@@ -48,12 +41,36 @@ npx generate-react-cli component {Name}
 ```bash
 npx generate-react-cli component {Name} --type=page
 ```
-2. Add the route to [`routes.ts`](src/routes.ts)
+
+### Add a GraphQL operation
+*Note: the below should work for both client and server-side GraphQL operations.*
+1. Write the GraphQL query in a new `.gql` file in [`graphql/codeday`](graphql/codeday) (For [CodeDay](https://graph.codeday.org) operations) or [`graphql/graphctf`](graphql/graphctf) (For GraphCTF operations)
+2. For GraphCTF operations only: you must start the GraphCTF server on port `5000` (Or edit [`codegen.yml`](codegen.yml))
+3. Regenerate the Apollo clients:
+```bash
+npm run generate
+```
+4. Add the below imports:
+```typescript
+import {codedayClient} from '@/lib/graphql/apollo'; //For CodeDay operations
+import {graphCtfClient} from '@/lib/graphql/apollo'; //For GraphCTF operations
+import {/* Query name + 'Document' */} from '@/lib/graphql/codeday';
+```
+5. Execute the GraphQL operation:
+```typescript
+//Error handling and authentication are already handled
+const {data} = await graphCtfClient.query({
+  query: /* Query name + 'Document' */,
+  variables: {} //GraphQL variables are automatically typed
+});
+
+//GraphQL response (data) is automatically typed too
+```
 
 ### Serve for development
 1. Start React with:
 ```bash
-npm start
+npm run dev
 ```
 
 ## Theming

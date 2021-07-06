@@ -9,9 +9,9 @@ import React, {useState} from 'react';
 import {Box, Button, Flex, Heading, Input, InputGroup, InputLeftAddon, InputRightAddon, Text} from '@chakra-ui/react';
 import {CmsInfoDocument} from '@/lib/graphql/codeday';
 import {GetStaticProps} from 'next';
-import {codedayClient} from '@/lib/graphql/apollo';
-import {getSession, signIn, useSession} from 'next-auth/client';
 import {Key, LogIn} from 'react-feather';
+import {codedayClient} from '@/lib/graphql/apollo';
+import {signIn, useSession} from 'next-auth/client';
 
 interface IndexProps
 {

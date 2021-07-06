@@ -6,6 +6,7 @@
     "build": "next build",
     "dev": "next dev",
     "generate": "graphql-codegen",
+    "prepare": "husky install",
     "start": "next start"
   },
   "dependencies": {
@@ -66,7 +67,8 @@
     "@typescript-eslint/parser": "^4.22.0",
     "eslint": "^7.24.0",
     "eslint-plugin-react": "^7.23.2",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.0"
   },
   "browserslist": {
     "production": [
