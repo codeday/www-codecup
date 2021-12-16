@@ -33,7 +33,7 @@ const shades = [
  * @param input Any input
  * @returns Hex-formatted color (eg: `#abcdef`)
  */
-export const hash = (input: string) =>
+export const hash = (input: string): string =>
 {
   //Get the theme
   const theme = useTheme();

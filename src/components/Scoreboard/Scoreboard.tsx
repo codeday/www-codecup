@@ -79,22 +79,29 @@ const Scoreboard: React.FC<ScoreboardProps> = (props: ScoreboardProps) =>
 
   //Generate graph data
   const graphData = {
-    datasets: items.map(item => ({
-      label: `${item.name} Score`,
+    datasets: items.map(item =>
+    {
+      //Generate the color
+      const color = item.color != null ? item.color : hash(item.name);
 
-      backgroundColor: item.color != null ? item.color : hash(item.name),
+      return {
+        label: `${item.name} Score`,
 
-      data: item.scores.map(score =>
-      {
-        //Get the minutes
-        const minutes = score.time.getTime() / (1000 * 60);
+        backgroundColor: color,
+        borderColor: color,
 
-        return {
-          x: minutes,
-          y: score.value
-        };
-      })
-    }))
+        data: item.scores.map(score =>
+        {
+          //Get the minutes
+          const minutes = score.time.getTime() / (1000 * 60);
+
+          return {
+            x: minutes,
+            y: score.value
+          };
+        })
+      };
+    })
   } as ChartData;
 
   return (
@@ -104,6 +111,7 @@ const Scoreboard: React.FC<ScoreboardProps> = (props: ScoreboardProps) =>
       <div style={{
         width: '60vw'
       }}>
+        {/* @ts-ignore */}
         <Line data={graphData} options={graphOptions} type="line" />
       </div>
 

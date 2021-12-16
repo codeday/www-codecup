@@ -22,6 +22,7 @@
     "@types/react-resizable": "^1.7.4",
     "@types/react-simple-maps": "^1.0.7",
     "@types/react-syntax-highlighter": "^13.5.2",
+    "chakra-ui-markdown-renderer": "^4.0.0",
     "chalk": "^5.0.0",
     "chart.js": "^3.6.2",
     "chartjs-adapter-luxon": "^1.1.0",
