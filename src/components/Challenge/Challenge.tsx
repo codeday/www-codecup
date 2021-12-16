@@ -2,9 +2,9 @@
 import Handle from '@/components/Handle/Handle';
 import Markdown from '@/components/Markdown/Markdown';
 import React, {SyntheticEvent, useState} from 'react';
-import {Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Input} from '@chakra-ui/react';
+import {Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Input} from '@chakra-ui/react';
 import {Resizable, ResizeCallbackData} from 'react-resizable';
-import {useSizes} from 'react-use-sizes';
+import {useWindowSize} from '@reach/window-size';
 
 interface ChallengeProps
 {
@@ -20,16 +20,16 @@ interface ChallengeProps
 const Challenge: React.FC<ChallengeProps> = (props: ChallengeProps) =>
 {
   //Reactive window size
-  const {windowSize} = useSizes();
+  const {height: windowHeight, width: windowWidth} = useWindowSize();
 
   //Drawer state
-  const [width, setWidth] = useState(windowSize.width * 0.6);
+  const [drawerWidth, setDrawerWidth] = useState(windowWidth * 0.6);
 
   //Resize handler
   const onResize = (_: SyntheticEvent, data: ResizeCallbackData) =>
   {
     //Update width
-    setWidth(data.size.width);
+    setDrawerWidth(data.size.width);
   };
 
   //Flag state
@@ -45,15 +45,15 @@ const Challenge: React.FC<ChallengeProps> = (props: ChallengeProps) =>
   return (
     <Drawer isOpen={props.isOpen} onClose={props.onClose} placement='right'>
       <DrawerOverlay />
-      <DrawerContent minWidth={width}>
+      <DrawerContent minWidth={drawerWidth}>
         <Resizable
           axis='x'
           handle={<Handle />}
           handleSize={[20, 20]}
-          height={windowSize.height}
+          height={windowHeight}
           onResize={onResize}
           resizeHandles={['w']}
-          width={width}
+          width={drawerWidth}
         >
           <Box marginLeft='20px'>
             <DrawerHeader textAlign="center">{props.name}</DrawerHeader>

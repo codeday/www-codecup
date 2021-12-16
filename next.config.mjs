@@ -3,15 +3,16 @@
  */
 
 //Imports
-const chalk = require('chalk');
-const withImages = require('next-images');
-const withPlugins = require('next-compose-plugins');
-const withTranspileModules = require('next-transpile-modules');
-const {randomBytes} = require('crypto');
+import chalk from 'chalk';
+import withImages from 'next-images';
+import withPlugins from 'next-compose-plugins';
+import withTranspileModules from 'next-transpile-modules';
+import {randomBytes} from 'crypto';
 
-//Ensure NextJS secret is provided and long enough
+//Get Next auth secret
 const entropy = 64;
-if (process.env.NEXTAUTH_SECRET == null || Buffer.byteLength(process.env.NEXTAUTH_SECRET, 'utf-8') < entropy)
+let nextAuthSecret = process.env.NEXTAUTH_SECRET;
+if (nextAuthSecret == null || Buffer.byteLength(nextAuthSecret, 'utf-8') < entropy)
 {
   //Log
   console.warn(chalk.red(`[WARNING] Environment variable "NEXTAUTH_SECRET" is missing or too short! (Needs to be at least ${entropy} bytes!)`));
@@ -24,11 +25,11 @@ if (process.env.NEXTAUTH_SECRET == null || Buffer.byteLength(process.env.NEXTAUT
   const secret = bytes.toString('base64');
 
   //Update environment variable
-  process.env.NEXTAUTH_SECRET = secret;
+  nextAuthSecret = secret;
 }
 
 //Export
-module.exports = withPlugins([
+export default withPlugins([
   withImages(),
   withTranspileModules([
     'react-syntax-highlighter'
@@ -39,16 +40,16 @@ module.exports = withPlugins([
        * Auth0 client configuration
        */
       auth0: {
+        authorization: `https://${process.env.AUTH0_ISSUER}/authorize?response_type=code&prompt=login`,
         clientId: process.env.AUTH0_CLIENT_ID,
         clientSecret: process.env.AUTH0_CLIENT_SECRET,
-        domain: process.env.AUTH0_DOMAIN,
-        authorizationUrl: `https://${process.env.AUTH0_DOMAIN}/authorize?response_type=code&prompt=login`
+        issuer: process.env.AUTH0_ISSUER
       },
       /**
        * NextAuth configuration
        */
       nextAuth: {
-        secret: process.env.NEXTAUTH_SECRET
+        secret: nextAuthSecret
       },
       /**
        * GraphCTF configuration

@@ -11,7 +11,7 @@ import {CmsInfoDocument} from '@/lib/graphql/codeday';
 import {GetStaticProps} from 'next';
 import {Key, LogIn} from 'react-feather';
 import {codedayClient} from '@/lib/graphql/apollo';
-import {signIn, useSession} from 'next-auth/client';
+import {signIn, useSession} from 'next-auth/react';
 
 interface IndexProps
 {
@@ -22,7 +22,7 @@ interface IndexProps
 const Index: React.FC<IndexProps> = (props: IndexProps) =>
 {
   //Session
-  const [session] = useSession();
+  const {data: session} = useSession();
 
   //Team code
   const [teamCode, setTeamCode] = useState('');

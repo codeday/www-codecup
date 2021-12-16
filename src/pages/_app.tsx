@@ -7,12 +7,12 @@ import '@/styles.css';
 import Footer from '@/components/Footer/Footer';
 import Head from 'next/head';
 import Header from '@/components/Header/Header';
-import Particles, {IParticlesParams} from 'react-particles-js';
+import Particles, {ISourceOptions} from 'react-tsparticles';
 import {ApolloProvider} from '@apollo/client';
 import {AppProps} from 'next/app';
 import {ChakraProvider, extendTheme, Flex, useToken} from '@chakra-ui/react';
 import {FC} from 'react';
-import {Provider, SessionProviderOptions} from 'next-auth/client';
+import {SessionProvider} from 'next-auth/react';
 import {graphCtfClient} from '@/lib/graphql/apollo';
 
 //Chakra theme
@@ -53,54 +53,55 @@ const theme = extendTheme({
   }
 });
 
-//Session options
-const sessionOptions = {
-  clientMaxAge: 5 * 60, //5 minutes
-  keepAlive: 60 //Minute
-} as SessionProviderOptions;
-
 const App: FC<AppProps> = (props: AppProps) =>
 {
   //ParticlesJS config
-  const particles: IParticlesParams = {
+  const particles: ISourceOptions = {
+    background: {
+      color: useToken('colors', 'gray.900')
+    },
+    backgroundMode: {
+      enable: true,
+      zIndex: -100
+    },
+    fpsLimit: 60,
     particles: {
-      twinkle: {
-        lines: {
-          enable: true,
-          color: "#9999ff",
-          frequency: .005,
-          opacity: 0.25,
-        },
-        particles: {
-          enable: true,
-          color: "#ffffff",
-          frequency: .01,
-          opacity: 1
-        }
-      },
-      move: {
-        speed: 0.20
-      },
       color: {
         value: "#009f00"
       },
       links: {
         color: "#009f00",
+        enable: true,
         triangles: {
           enable: true,
-          frequency: .3,
-          opacity: .02,
+          frequency: 0.3,
+          opacity: 0.02,
           color: "#00ff00"
         }
+      },
+      move: {
+        enable: true,
+        speed: 0.2
+      },
+      twinkle: {
+        lines: {
+          enable: true,
+          color: "#9999ff",
+          frequency: 0.005,
+          opacity: 0.25,
+        },
+        particles: {
+          enable: true,
+          color: "#ffffff",
+          frequency: 0.01,
+          opacity: 1
+        }
       }
-    },
-    background: {
-      color: useToken('colors', 'gray.900')
     }
   };
 
   return (
-    <Provider options={sessionOptions}>
+    <SessionProvider>
       <ApolloProvider client={graphCtfClient} >
         <ChakraProvider theme={theme}>
           <Flex align="center" flexDirection="column" height="100%" position="relative">
@@ -119,20 +120,19 @@ const App: FC<AppProps> = (props: AppProps) =>
               <props.Component {...props.pageProps} />
             </Flex>
 
-            <Particles params={particles} style={{
+            <Particles options={particles} style={{
               height: '100%',
               left: 0,
               position: 'fixed',
               top: 0,
-              width: '100%',
-              zIndex: -4
+              width: '100%'
             }} />
-            <Footer />
 
+            <Footer />
           </Flex>
         </ChakraProvider>
       </ApolloProvider>
-    </Provider>
+    </SessionProvider>
   );
 };
 

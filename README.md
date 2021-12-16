@@ -8,7 +8,7 @@ Name | Description
 --- | ---
 `AUTH0_CLIENT_ID` | Auth0 OAuth Client ID
 `AUTH0_CLIENT_SECRET` | Auth0 OAuth Client Secret
-`AUTH0_DOMAIN` | Auth0 Organization Endpoint
+`AUTH0_ISSUER` | Auth0 Organization Endpoint
 `NEXTAUTH_SECRET` | [NextAuth global secret](https://next-auth.js.org/configuration/options#secret)
 `NEXTAUTH_URL` | [NextAuth site URL](https://next-auth.js.org/configuration/options#nextauth_url)
 `GRAPHCTF_AUDIENCE` | GraphCTF exchange token audience

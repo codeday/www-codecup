@@ -6,12 +6,12 @@ import React from 'react';
 import logo from '@/logo.svg';
 import {BarChart2, Flag} from 'react-feather';
 import {Box, Button, Flex, Img, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Stack, Text} from '@chakra-ui/react';
-import {useSession} from 'next-auth/client';
+import {useSession} from 'next-auth/react';
 
 const Header: React.FC = () =>
 {
   //Session
-  const [session] = useSession();
+  const {data: session} = useSession();
 
   return (
     <Flex align="center" as="header" justifyContent="space-between" padding="5px" width="100%" wrap="wrap">
@@ -40,7 +40,7 @@ const Header: React.FC = () =>
         <Box>
           <Popover placement="left-end" trigger="click">
             <PopoverTrigger>
-              <Img borderRadius="100%" cursor="pointer" src={session.user!.image!} width={16} />
+              <Img borderRadius="100%" cursor="pointer" src={session.user!.image!} width={12} />
             </PopoverTrigger>
             <PopoverContent width="fit-content">
               <PopoverArrow />
@@ -48,7 +48,7 @@ const Header: React.FC = () =>
               <PopoverHeader>Info</PopoverHeader>
               <PopoverBody textAlign="center">
                 <Text>Hello {session.user!.name}!</Text>
-                <Text>You're on the _FILL_ME_IN_ team.</Text>
+                <Text>You&apos;re on the _FILL_ME_IN_ team.</Text>
               </PopoverBody>
             </PopoverContent>
           </Popover>

@@ -4,17 +4,20 @@
 
 //Imports
 import NextAuth from 'next-auth';
-import Providers from 'next-auth/providers';
+import Auth0Provider from 'next-auth/providers/auth0';
 import getConfig from 'next/config';
 
 //Get the config
 const {serverRuntimeConfig} = getConfig();
 
-//Export
-export default NextAuth({
+//API handler
+const handler = NextAuth({
   secret: serverRuntimeConfig.nextAuth.secret,
   providers: [
     //Auth0 provider
-    Providers.Auth0(serverRuntimeConfig.auth0)
+    Auth0Provider(serverRuntimeConfig.auth0)
   ]
 });
+
+//Export
+export default handler;

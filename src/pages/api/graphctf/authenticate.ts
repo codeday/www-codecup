@@ -7,9 +7,10 @@
 //Imports
 import authenticate from '@/lib/graphctf/authenticate';
 import type {NextApiRequest, NextApiResponse} from 'next';
-import {getSession} from 'next-auth/client';
+import {getSession} from 'next-auth/react';
 
-export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> =>
+//API handler
+const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> =>
 {
   //Deny if wrong method
   if (req.method != 'POST')
@@ -59,3 +60,6 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
     token: sessionToken
   });
 };
+
+//Export
+export default handler;

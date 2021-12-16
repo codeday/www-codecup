@@ -1,24 +1,28 @@
 import 'chartjs-adapter-luxon';
-import ColorHash from 'color-hash';
 import React, {CSSProperties} from 'react';
 import {Box, Heading, Table, Tbody, Td, Th, Thead, Tr, useToken} from '@chakra-ui/react';
+import {Chart, CategoryScale, Legend, LineElement, LinearScale, PointElement, TimeSeriesScale} from 'chart.js';
 import {ChartOptions, ChartData} from 'chart.js/types/index.esm';
 import {Line} from 'react-chartjs-2';
+import {hash} from '@/lib/color';
+
+//Register ChartJS modules
+Chart.register(
+  CategoryScale,
+  Legend,
+  LineElement,
+  LinearScale,
+  PointElement,
+  TimeSeriesScale,
+);
 
 /**
  * Row styling
  */
-const rowStyle = 
-{
+const rowStyle = {
   borderColor: 'var(--chakra-colors-gray-500) !important',
   padding: '10px !important'
 } as CSSProperties;
-
-//Instantiate a color hasher
-const hasher = new ColorHash({
-  lightness: [0.4, 0.5, 0.65],
-  saturation: 1
-});
 
 interface ScoreboardProps
 {
@@ -37,7 +41,7 @@ const Scoreboard: React.FC<ScoreboardProps> = (props: ScoreboardProps) =>
   /**
    * Options for the graph
    */
-   const graphOptions = {
+  const graphOptions = {
     plugins: {
       legend: {
         labels: {
@@ -46,9 +50,9 @@ const Scoreboard: React.FC<ScoreboardProps> = (props: ScoreboardProps) =>
             family: useToken('fonts', 'body'),
             size: 16
           },
-          
-          pointStyle: 'crossRot',
-          boxWidth: 10,
+
+          pointStyle: 'circle',
+          boxWidth: 5,
           usePointStyle: true
         }
       }
@@ -64,7 +68,8 @@ const Scoreboard: React.FC<ScoreboardProps> = (props: ScoreboardProps) =>
   } as ChartOptions<'line'>;
 
   //Sort items by score
-  const items = props.items.sort((itemA, itemB) => {
+  const items = props.items.sort((itemA, itemB) =>
+  {
     //Get item scores
     const itemAScore = itemA.scores[itemA.scores.length - 1].value;
     const itemBScore = itemB.scores[itemB.scores.length - 1].value;
@@ -77,10 +82,7 @@ const Scoreboard: React.FC<ScoreboardProps> = (props: ScoreboardProps) =>
     datasets: items.map(item => ({
       label: `${item.name} Score`,
 
-      borderColor: item.color != null ? item.color : hasher.hex(item.name),
-
-      pointStyle: 'crossRot',
-      pointRadius: 7,
+      backgroundColor: item.color != null ? item.color : hash(item.name),
 
       data: item.scores.map(score =>
       {
